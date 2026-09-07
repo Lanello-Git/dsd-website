@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TrustBar from '../components/TrustBar.astro';
+import { site } from '../config/site';
+import { service, serviceHref } from '../data/services';
+import { city, cityHref } from '../data/cities';
+import { photo, alt as altOf } from '../data/photos';
+import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema';
+import type { CityContent } from '../data/types';
+
+interface Props { content: CityContent }
+const { content: c } = Astro.props;
+const path = cityHref(c.slug);
+const crumbs = [{ name: 'Werkgebied', href: '/werkgebied/' }, { name: `Dakwerker ${c.city}`, href: path }];
+const schema = [
+  serviceSchema({ name: `Dakwerken in ${c.city}`, serviceType: 'Dakwerken en renovaties', description: c.seo.description, path, areaServed: [c.city, ...c.neighbourhoods.items] }),
+  breadcrumbSchema(crumbs),
+  faqSchema(c.faq),
+];
+const nearby = c.nearby.map((slug) => city(slug)).map((n) => ({ name: `Dakwerker ${n.city}`, href: cityHref(n.slug), text: `${n.distanceKm} km van Aalter` }));
+---
+<Base title={c.seo.title} description={c.seo.description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+  <Hero h1={c.hero.h1} intro={c.hero.intro} image={c.image} imageAlt={c.imageAlt} eyebrow={`Dakwerker voor ${c.city} en deelgemeenten`} />
+  <TrustBar />
+
+  <section class="section" aria-labelledby="about-title">
+    <div class="container split">
+      <div class="prose">
+        <span class="eyebrow">Dakwerken in {c.city}</span>
+        <h2 id="about-title" class="mt-0">{c.about.heading}</h2>
+        {c.about.paragraphs.map((p) => <p>{p}</p>)}
+        <div class="btn-row" style="margin-top:1.5rem">
+          <a class="btn btn--gold" href="/contact/">Gratis offerte in {c.city} <Icon name="arrow-right" /></a>
+          <a class="btn btn--outline" href={`tel:${site.phoneE164}`}><Icon name="phone" /> {site.phoneDisplay}</a>
+        </div>
+      </div>
+      <div class="photo">
+        <Image src={photo('bestelwagen-dsd-dakwerken-voor-woning')} alt={altOf('bestelwagen-dsd-dakwerken-voor-woning')} widths={[560, 900, 1200]} sizes="(min-width: 860px) 45vw, 92vw" format="webp" quality={72} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Onze diensten in {c.city}</span>
+        <h2 id="services-title">{c.services.heading}</h2>
+        <p class="lead">{c.services.intro}</p>
+      </div>
+      <div class="grid grid--3">
+        {c.services.items.map((it) => {
+          const s = service(it.slug);
+          return (
+            <a class="card city-service" href={serviceHref(s.slug)}>
+              <span class="icon-badge"><Icon name={s.icon as any} /></span>
+              <h3>{s.name} in {c.city}</h3>
+              <p>{it.text}</p>
+              <span class="city-service__link">Meer over {s.navLabel.toLowerCase()} <Icon name="arrow-right" size={18} /></span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hoods-title">
+    <div class="container split">
+      <div class="prose">
+        <span class="eyebrow">Deelgemeenten en wijken</span>
+        <h2 id="hoods-title" class="mt-0">{c.neighbourhoods.heading}</h2>
+        <p>{c.neighbourhoods.intro}</p>
+        <ul class="towns">
+          {c.neighbourhoods.items.map((n) => <li>{n}</li>)}
+        </ul>
+      </div>
+      <div class="prose">
+        <span class="eyebrow">Lokale ervaring</span>
+        <h2 class="mt-0">{c.localProof.heading}</h2>
+        {c.localProof.paragraphs.map((p) => <p>{p}</p>)}
+        <a href="/realisaties/" class="btn btn--outline">Bekijk onze realisaties <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <Steps />
+
+  <Faq items={c.faq} heading={`Veelgestelde vragen over dakwerken in ${c.city}`} />
+
+  <RelatedLinks heading="Ook actief in de buurt" items={nearby} eyebrow="Werkgebied" />
+
+  <section class="section section--cream" aria-labelledby="cta-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Gratis en vrijblijvend</span>
+        <h2 id="cta-title" class="mt-0">{c.cta.heading}</h2>
+        <p class="lead">{c.cta.text}</p>
+        <ul class="checklist">
+          <li><Icon name="check" /> {c.city} ligt op {c.distanceKm} km van onze thuisbasis in Aalter</li>
+          <li><Icon name="check" /> Gratis plaatsbezoek en opmeting</li>
+          <li><Icon name="check" /> Duidelijke offerte met vaste prijzen</li>
+        </ul>
+        <a class="btn btn--ink" href={`tel:${site.phoneE164}`}><Icon name="phone" /> Bel {site.phoneDisplay}</a>
+      </div>
+      <ContactForm compact heading={`Vraag uw gratis offerte aan voor ${c.city}`} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .city-service { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+  .city-service:hover { border-color: var(--c-gold); color: inherit; }
+  .city-service h3 { font-size: var(--fs-lg); margin-bottom: var(--space-2); }
+  .city-service p { color: var(--c-muted); flex: 1; }
+  .city-service__link { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; color: var(--c-gold-deep); margin-top: var(--space-3); }
+  .towns { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .towns li { margin: 0; background: var(--c-cream); border: 1px solid var(--c-line); border-radius: 999px; padding: 0.25rem 0.7rem; font-size: var(--fs-sm); }
+</style>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { services, serviceHref } from '../data/services';
+import { photo } from '../data/photos';
+interface Props { limit?: number; exclude?: string[]; withImages?: boolean; heading?: string; intro?: string; eyebrow?: string }
+const { limit, exclude = [], withImages = true, heading = 'Onze dakwerken en renovaties', intro, eyebrow = 'Diensten' } = Astro.props;
+const list = services.filter((s) => !exclude.includes(s.slug)).slice(0, limit ?? services.length);
+---
+<section class="section services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 id="services-title">{heading}</h2>
+      {intro && <p class="lead" style="margin-inline:auto">{intro}</p>}
+    </div>
+    <div class="grid grid--3">
+      {list.map((s) => (
+        <a class="service-card" href={serviceHref(s.slug)}>
+          {withImages && (
+            <div class="service-card__media">
+              <Image src={photo(s.image)} alt="" widths={[420, 640, 900]} sizes="(min-width: 900px) 30vw, (min-width: 560px) 45vw, 92vw" format="webp" quality={70} />
+            </div>
+          )}
+          <div class="service-card__body">
+            <span class="icon-badge"><Icon name={s.icon as any} /></span>
+            <h3>{s.name}</h3>
+            <p>{s.summary}</p>
+            <span class="service-card__link">Meer over {s.navLabel.toLowerCase()} <Icon name="arrow-right" size={18} /></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-card { display: flex; flex-direction: column; background: var(--c-white); border: 1px solid var(--c-line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease; }
+  .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); color: inherit; }
+  .service-card__media { aspect-ratio: 16 / 10; overflow: hidden; }
+  .service-card__media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .service-card__body { padding: var(--space-5); display: flex; flex-direction: column; flex: 1; }
+  .service-card h3 { margin-bottom: var(--space-2); }
+  .service-card p { color: var(--c-muted); flex: 1; }
+  .service-card__link { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; color: var(--c-gold-deep); margin-top: var(--space-4); }
+  .service-card:hover .service-card__link { color: var(--c-ink); }
+</style>

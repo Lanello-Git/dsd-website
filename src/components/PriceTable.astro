@@ -1,0 +1,42 @@
+---
+import type { PriceRow } from '../data/types';
+import Icon from './Icon.astro';
+interface Props { heading: string; intro: string; rows: PriceRow[]; note: string }
+const { heading, intro, rows, note } = Astro.props;
+---
+<section class="section section--cream pricing" aria-labelledby="pricing-title">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Richtprijzen</span>
+        <h2 id="pricing-title">{heading}</h2>
+        <p class="lead">{intro}</p>
+        <ul class="checklist">
+          <li><Icon name="check" /> Gratis plaatsbezoek en offerte, zonder verplichtingen</li>
+          <li><Icon name="check" /> Vaste prijs in de offerte, geen verrassingen achteraf</li>
+          <li><Icon name="check" /> 6% btw voor woningen ouder dan 10 jaar (wij regelen de attesten)</li>
+        </ul>
+        <a class="btn btn--ink" href="/contact/">Vraag uw prijs op maat <Icon name="arrow-right" /></a>
+      </div>
+      <div class="card card--flat table-wrap">
+        <table>
+          <thead><tr><th scope="col">Werk</th><th scope="col">Richtprijs</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <td><strong>{r.item}</strong>{r.note && <><br /><span class="small muted">{r.note}</span></>}</td>
+                <td>{r.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="small muted pricing__note">{note}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing__note { margin-top: var(--space-4); }
+  .pricing td:last-child { white-space: nowrap; font-weight: 700; color: var(--c-ink); }
+</style>

@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Hero from '../../components/Hero.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import ServiceCards from '../../components/ServiceCards.astro';
+import Steps from '../../components/Steps.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import Icon from '../../components/Icon.astro';
+import { photo, alt as altOf } from '../../data/photos';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+const crumbs = [{ name: 'Diensten', href: '/diensten/' }];
+const faq = [
+  { q: 'Doen jullie zowel dakwerken als renovaties?', a: 'Ja, allebei. DSD Dakwerken is in de eerste plaats dakwerker (hellende daken, platte daken, isolatie, dakramen, herstellingen), maar wij voeren ook renovatiewerken uit: metselwerk, Gyproc-wanden, gevelbekleding, terrassen en het afwerken van een zolder. Zo kunt u de renovatie van uw woning aan één aannemer toevertrouwen.' },
+  { q: 'Werken jullie ook voor kleine klussen?', a: 'Ja. Een lek, enkele kapotte dakpannen, een dakgoot of een dakraam vervangen: ook voor kleinere karweien komen wij langs. Wij plannen die tussen de grotere werven in, zodat u niet lang hoeft te wachten.' },
+  { q: 'Welke materialen gebruiken jullie?', a: 'Wij werken met dakpannen van Wienerberger Koramic, dakmaterialen van APOK, dakramen van VELUX en drukvaste PIR-isolatie voor platte daken. Voor gevelbekleding kiezen wij duurzame houtsoorten. Alles volgens de normen van Embuild.' },
+  { q: 'Kan ik een offerte krijgen voor meerdere werken tegelijk?', a: 'Zeker. Wilt u bijvoorbeeld uw dak renoveren, een dakraam plaatsen en meteen ook de gevel bekleden, dan maken wij één offerte op met een duidelijke prijs per onderdeel. U beslist zelf wat u laat uitvoeren en wanneer.' },
+];
+---
+<Base title="Dakwerken en renovaties in Aalter | Diensten | DSD Dakwerken" description="Alle diensten van DSD Dakwerken: dakrenovatie, hellende en platte daken, dakisolatie, dakherstelling, dakramen, dak ontmossen, gevelbekleding en renovatiewerken in Aalter en het Meetjesland." path="/diensten/" schema={[breadcrumbSchema(crumbs), faqSchema(faq)]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero eyebrow="Diensten" h1="Dakwerken en renovaties in Aalter en het Meetjesland" intro="Eén vakman voor uw hele dak en de renovatie van uw woning. DSD Dakwerken plaatst en renoveert hellende en platte daken, isoleert, herstelt en verbouwt. Met eigen mensen, correcte prijzen en 10 jaar garantie op waterdichtheid." image="stock-dakpannen-leggen" imageAlt="Dakwerker legt kleidakpannen op een hellend dak" />
+  <TrustBar />
+  <ServiceCards heading="Kies de dienst die u nodig hebt" intro="Elke dienst heeft een eigen pagina met uitleg, richtprijzen en veelgestelde vragen. Twijfelt u? Bel Peter, hij zegt u eerlijk wat uw dak nodig heeft." />
+
+  <section class="section section--cream" aria-labelledby="both-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Dakwerken en renovaties</span>
+        <h2 id="both-title">Twee specialiteiten, één aannemer</h2>
+      </div>
+      <div class="split">
+        <div class="card">
+          <span class="icon-badge"><Icon name="roof" /></span>
+          <h3>Dakwerken</h3>
+          <p>Alles wat met uw dak te maken heeft: een <a href="/dakrenovatie/">volledige dakrenovatie</a>, nieuwe pannen of leien op een <a href="/hellende-daken/">hellend dak</a>, EPDM op een <a href="/platte-daken/">plat dak</a>, <a href="/dakisolatie/">dakisolatie</a>, <a href="/dakramen/">VELUX-dakramen</a>, <a href="/dak-ontmossen/">ontmossen en coaten</a> en <a href="/dakherstelling/">dringende herstellingen</a> bij lekken of stormschade.</p>
+        </div>
+        <div class="card">
+          <span class="icon-badge"><Icon name="hammer" /></span>
+          <h3>Renovaties en karweien</h3>
+          <p>Van een uitbouw met <a href="/gevelbekleding/">houten gevelbekleding</a> tot het <a href="/renovatiewerken/">verbouwen van uw woning</a>: metselwerk, Gyproc-wanden, een zolder afwerken, een terras aanleggen of een tuinmuur bouwen. Dezelfde ploeg, dezelfde afwerking, dezelfde correcte prijs.</p>
+        </div>
+      </div>
+      <div class="photo" style="margin-top:2rem">
+        <Image src={photo('luchtfoto-renovatie-plat-dak-houten-gevel')} alt={altOf('luchtfoto-renovatie-plat-dak-houten-gevel')} widths={[800, 1200, 1800]} sizes="92vw" format="webp" quality={70} />
+      </div>
+    </div>
+  </section>
+
+  <Steps />
+  <Faq items={faq} heading="Veelgestelde vragen over onze diensten" />
+  <Cta />
+</Base>

@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import Cta from '../components/Cta.astro';
+import Icon from '../components/Icon.astro';
+import { breadcrumbSchema } from '../lib/schema';
+
+const crumbs = [{ name: 'Realisaties', href: '/realisaties/' }];
+const groups = [
+  {
+    id: 'dakrenovaties', eyebrow: 'Hellende daken', title: 'Dakrenovaties en nieuwe pannendaken', href: '/dakrenovatie/', link: 'Meer over dakrenovatie',
+    text: 'Volledige dakrenovaties met nieuw onderdak, isolatie en kleidakpannen van Wienerberger Koramic. Van villa\'s en fermettes tot hoeves in het Meetjesland.',
+    items: [
+      { image: 'dakrenovatie-villa-luchtfoto', caption: 'Volledige dakrenovatie van een villa, nieuwe kleidakpannen en isolatie' },
+      { image: 'hoeve-renovatie-nieuw-dak-luchtfoto', caption: 'Hoeve met volledig nieuw pannendak en dakramen' },
+      { image: 'nieuw-pannendak-woning-rode-pannen', caption: 'Nieuw hellend dak in rode kleidakpannen' },
+      { image: 'dakrenovatie-woning-rode-dakpannen', caption: 'Afgewerkte dakrenovatie op een vrijstaande woning' },
+      { image: 'onderdak-plaatsen-dakrenovatie', caption: 'Nieuw onderdak en isolatie, klaar voor de pannen' },
+      { image: 'dakrenovatie-stelling-woning', caption: 'Stelling rond de woning tijdens de dakrenovatie' },
+      { image: 'werf-wienerberger-koramic-dakpannen', caption: 'Koramic dakpannen geleverd op de werf' },
+      { image: 'afgewerkt-pannendak-woning', caption: 'Afgewerkt pannendak op een halfopen woning' },
+      { image: 'dakwerkers-op-dak-stelling-verreiker', caption: 'Onze ploeg aan het werk met stelling en verreiker' },
+    ],
+  },
+  {
+    id: 'platte-daken', eyebrow: 'Platte daken en uitbouwen', title: 'Platte daken in EPDM en uitbouwen', href: '/platte-daken/', link: 'Meer over platte daken',
+    text: 'Waterdichte platte daken in EPDM op uitbouwen, garages en aanbouwen, vaak gecombineerd met een lichtkoepel en houten gevelbekleding.',
+    items: [
+      { image: 'uitbouw-houten-gevelbekleding-plat-dak', caption: 'Uitbouw met plat dak in EPDM, lichtkoepel en houten gevelbekleding' },
+      { image: 'luchtfoto-renovatie-plat-dak-houten-gevel', caption: 'Luchtfoto van de uitbouw met plat dak en houten gevel' },
+      { image: 'woning-dakwerken-epdm-materiaal', caption: 'EPDM-materiaal geleverd voor het platte dak van een woning' },
+    ],
+  },
+  {
+    id: 'gevelbekleding', eyebrow: 'Gevels', title: 'Houten gevelbekleding en gevelrenovatie', href: '/gevelbekleding/', link: 'Meer over gevelbekleding',
+    text: 'Verticale houten gevelbekleding in duurzame houtsoorten, gerenoveerde voorgevels met nieuwe ramen en luifels.',
+    items: [
+      { image: 'houten-gevelbekleding-gevel-ramen', caption: 'Verticale houten gevelbekleding met nieuwe ramen' },
+      { image: 'gerenoveerde-gevel-luifel', caption: 'Gerenoveerde voorgevel met nieuwe ramen en zwarte luifel' },
+      { image: 'renovatie-woning-bestelwagens-dsd', caption: 'Renovatie van een woning in het Meetjesland' },
+    ],
+  },
+  {
+    id: 'dakramen', eyebrow: 'Dakramen', title: 'VELUX-dakramen', href: '/dakramen/', link: 'Meer over dakramen',
+    text: 'Dakramen van VELUX, netjes ingewerkt in het dak en afgewerkt langs binnen.',
+    items: [
+      { image: 'velux-dakraam-binnenzijde', caption: 'VELUX-dakraam afgewerkt langs binnen' },
+      { image: 'werf-materialen-dakpannen-isolatie', caption: 'Materialen klaar op de werf' },
+      { image: 'bestelwagen-dsd-dakwerken-voor-woning', caption: 'Afgewerkt dak, klaar voor oplevering' },
+    ],
+  },
+];
+---
+<Base title="Realisaties: dakrenovaties, platte daken en gevels | DSD Dakwerken Aalter" description="Bekijk echte realisaties van DSD Dakwerken in Aalter en het Meetjesland: dakrenovaties, nieuwe pannendaken, platte daken in EPDM, houten gevelbekleding en VELUX-dakramen. Vraag een gratis offerte aan." path="/realisaties/" schema={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero eyebrow="Realisaties" h1="Realisaties van DSD Dakwerken in Aalter en omgeving" intro="Echte daken, gevels en verbouwingen van klanten in het Meetjesland. Geen stockfoto's, wel werk waar wij trots op zijn. Meer dan 150 projecten in de laatste drie jaar." image="luchtfoto-renovatie-plat-dak-houten-gevel" imageAlt="Luchtfoto van een renovatie met plat dak in EPDM en houten gevelbekleding door DSD Dakwerken" />
+  <TrustBar />
+
+  {groups.map((g, i) => (
+    <section class:list={['section', { 'section--cream': i % 2 === 1 }]} id={g.id} aria-labelledby={`${g.id}-title`}>
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">{g.eyebrow}</span>
+          <h2 id={`${g.id}-title`}>{g.title}</h2>
+          <p class="lead">{g.text}</p>
+        </div>
+        <PhotoGrid items={g.items} />
+        <p style="margin-top:1.5rem"><a class="btn btn--outline" href={g.href}>{g.link} <Icon name="arrow-right" /></a></p>
+      </div>
+    </section>
+  ))}
+
+  <section class="section" aria-labelledby="deurle-title">
+    <div class="container prose">
+      <span class="eyebrow">Uitgelicht project</span>
+      <h2 id="deurle-title" class="mt-0">Volledige dakrenovatie in Deurle (Sint-Martens-Latem)</h2>
+      <p>In Deurle vernieuwden wij het volledige dak van een woning. De oude Koramic Vlaamse pannen waren versleten en het dak was onvoldoende geïsoleerd. Wij verwijderden de oude bedekking, plaatsten een nieuw onderdak en nieuwe isolatie en dekten het dak opnieuw met Terreal Prieuré pannen, een kleidakpan die past bij het karakter van de woningen in de Leiestreek.</p>
+      <p>Alle dakmaterialen werden geleverd door APOK, een leverancier waarmee wij al jaren samenwerken. Het resultaat is een dak dat weer tientallen jaren meegaat, een lagere energiefactuur voor de bewoners en een woning die er opnieuw uitziet zoals ze hoort. Meer weten over deze aanpak? Lees onze pagina over <a href="/dakrenovatie/">dakrenovatie</a> of over <a href="/werkgebied/dakwerker-gent/">dakwerken in de regio Gent</a>.</p>
+    </div>
+  </section>
+
+  <Cta heading="Wilt u uw dak of gevel ook zo zien?" text="Vraag een gratis offerte aan. Peter komt langs, bekijkt uw woning en bezorgt u een duidelijke prijs zonder verrassingen." />
+</Base>

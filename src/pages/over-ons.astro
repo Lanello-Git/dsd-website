@@ -1,0 +1,105 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import Steps from '../components/Steps.astro';
+import Cta from '../components/Cta.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { photo, alt as altOf } from '../data/photos';
+import { breadcrumbSchema } from '../lib/schema';
+
+const crumbs = [{ name: 'Over ons', href: '/over-ons/' }];
+const values = [
+  { icon: 'badge-euro', title: 'Correcte prijzen', text: 'Wij rekenen wat het werk waard is, niet meer. U krijgt een offerte met vaste prijzen per onderdeel en geen verrassingen op de factuur.' },
+  { icon: 'users', title: 'Eigen ploeg, geen onderaannemers', text: 'Peter, zijn zoon en een vaste ploeg vakmensen voeren alle werken zelf uit. Zo weet u wie er op uw dak staat en wie u kunt aanspreken.' },
+  { icon: 'shield-check', title: '10 jaar garantie op waterdichtheid', text: 'Op elk dak dat wij plaatsen of renoveren geven wij 10 jaar garantie op waterdichtheid, bovenop de garantie van de fabrikant.' },
+  { icon: 'calendar', title: 'Op tijd', text: 'Wij beloven geen datum die wij niet kunnen halen. Wat afgesproken is, wordt uitgevoerd zoals gepland.' },
+  { icon: 'award', title: 'Kwaliteit volgens de normen van Embuild', text: 'Wij werken volgens de regels van de kunst en de normen van Embuild (voorheen Confederatie Bouw), met materialen van Wienerberger, APOK, VELUX, Lecot en Steyro.' },
+  { icon: 'handshake', title: 'Eenvoudig en eerlijk', text: 'Geen verkooppraatjes. Peter zegt u wat uw dak nodig heeft, ook als dat minder is dan u dacht.' },
+];
+const photos = [
+  { image: 'dakwerkers-op-dak-stelling-verreiker', caption: 'Onze ploeg aan het werk op een hellend dak' },
+  { image: 'renovatie-woning-bestelwagens-dsd', caption: 'Op de werf met eigen materiaal en bestelwagens' },
+  { image: 'werf-materialen-dakpannen-isolatie', caption: 'Dakpannen en isolatie klaar voor plaatsing' },
+];
+---
+<Base title="Over DSD Dakwerken: Peter De Smet, dakwerker uit Knesselare | Aalter" description="Maak kennis met Peter De Smet en DSD Dakwerken uit Knesselare (Aalter): meer dan 30 jaar ervaring, eigen ploeg zonder onderaannemers, correcte prijzen en 10 jaar garantie op waterdichtheid." path="/over-ons/" schema={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero eyebrow="Over ons" h1="Peter De Smet en DSD Dakwerken: al meer dan 30 jaar op daken in het Meetjesland" intro="Een familiebedrijf uit Knesselare dat doet wat het belooft. Eigen vakmensen, correcte prijzen en een dak dat dicht blijft." image="bestelwagen-dsd-dakwerken-voor-woning" imageAlt="Bestelwagen van DSD Dakwerken voor een woning met nieuw pannendak" />
+  <TrustBar />
+
+  <section class="section" aria-labelledby="story-title">
+    <div class="container split">
+      <div class="prose">
+        <span class="eyebrow">Ons verhaal</span>
+        <h2 id="story-title" class="mt-0">Van dakwerker tot familiebedrijf</h2>
+        <p>Peter De Smet staat al meer dan 30 jaar op daken. Hij leerde het vak op de werf, in weer en wind, en bouwde stap voor stap zijn eigen klantenkring op in Knesselare, Aalter en het Meetjesland. Vandaag werkt hij samen met zijn zoon en een vaste ploeg vakmensen onder de naam DSD Dakwerken.</p>
+        <p>Wij zijn dakwerkers in de eerste plaats: hellende daken in pannen of leien, platte daken in EPDM, isolatie, dakramen en herstellingen. Maar omdat klanten ons steeds vaker vroegen om ook de rest van de woning aan te pakken, doen wij vandaag ook renovatiewerken: gevelbekleding, metselwerk, Gyproc, terrassen en zolders. Zo hebt u één aannemer en één aanspreekpunt.</p>
+        <p>In de laatste drie jaar voerden wij meer dan 150 projecten uit, van een enkele dakgoot tot volledige dakrenovaties en verbouwingen. Bekijk een selectie op onze pagina <a href="/realisaties/">realisaties</a>.</p>
+      </div>
+      <div class="photo photo--tall">
+        <Image src={photo('dakwerkers-op-dak-stelling-verreiker')} alt={altOf('dakwerkers-op-dak-stelling-verreiker')} widths={[560, 900, 1200]} sizes="(min-width: 860px) 45vw, 92vw" format="webp" quality={72} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" aria-labelledby="values-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Waar wij voor staan</span>
+        <h2 id="values-title">Waarom klanten voor DSD Dakwerken kiezen</h2>
+      </div>
+      <div class="grid grid--3">
+        {values.map((v) => (
+          <div class="card card--flat">
+            <span class="icon-badge"><Icon name={v.icon as any} /></span>
+            <h3>{v.title}</h3>
+            <p class="muted">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-title">
+    <div class="container split split--reverse">
+      <div class="prose">
+        <span class="eyebrow">Hoe wij werken</span>
+        <h2 id="how-title" class="mt-0">Eenvoudig, duidelijk en zonder verrassingen</h2>
+        <p>Peter komt zelf langs voor het plaatsbezoek. Hij kruipt op het dak of de zolder, bekijkt de constructie en luistert naar wat u wilt. Daarna krijgt u een offerte waarin elk onderdeel apart staat: afbraak, onderdak, isolatie, dakbedekking, zinkwerk, stelling en afvoer. Zo ziet u precies waar uw geld naartoe gaat.</p>
+        <p>Tijdens de werken is uw dak elke avond regendicht en na de werken is de werf opgeruimd. U krijgt van ons de garantiedocumenten, het attest voor 6% btw en de facturen die u nodig hebt voor uw premie via Mijn VerbouwPremie.</p>
+        <p>Vragen? Bel Peter rechtstreeks op <a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a>.</p>
+      </div>
+      <div>
+        <PhotoGrid items={photos} columns={2} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink" aria-labelledby="brands-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Materialen en partners</span>
+        <h2 id="brands-title">Wij werken met merken die hun waarde bewezen hebben</h2>
+        <p class="lead">Een dak is maar zo goed als zijn materialen. Daarom kiezen wij bewust voor leveranciers die wij al jaren kennen.</p>
+      </div>
+      <ul class="brands">
+        {site.brands.map((b) => <li>{b}</li>)}
+        <li>Embuild-normen</li>
+      </ul>
+    </div>
+  </section>
+
+  <Steps />
+  <Cta heading="Zin om samen te werken?" text="Bel Peter of vraag online een gratis offerte aan. U hoort binnen één werkdag van ons." />
+</Base>
+
+<style>
+  .photo--tall :global(img) { aspect-ratio: 4 / 5; }
+  .brands { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .brands li { margin: 0; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 0.5rem 1.1rem; font-weight: 600; color: var(--c-white); }
+</style>

@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import logo from '../assets/logo-dsd-dakwerken.png';
+import { site } from '../config/site';
+import { services, serviceHref } from '../data/services';
+import { cities, cityHref } from '../data/cities';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="/" aria-label={`${site.name}, naar de startpagina`}>
+        <Image src={logo} alt={`Logo ${site.name}`} width={220} height={81} class="footer__logo" />
+      </a>
+      <p>Dakwerken en renovaties, kwalitatief en op tijd. Eigen vakmensen, geen onderaannemers, {site.guarantee.toLowerCase()}.</p>
+      <ul class="footer__contact">
+        <li><Icon name="map-pin" size={18} /><span>{site.address.street}<br />{site.address.postalCode} {site.address.city} ({site.address.subMunicipality})</span></li>
+        <li><Icon name="phone" size={18} /><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a></li>
+        <li><Icon name="mail" size={18} /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><Icon name="clock" size={18} /><span>{site.hours.map((h) => <span class="footer__hours">{h.days}: {h.open} - {h.close}</span>)}</span></li>
+      </ul>
+      <div class="footer__social">
+        {site.social.facebook && <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="DSD Dakwerken op Facebook"><Icon name="facebook" /></a>}
+        {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="DSD Dakwerken op Instagram"><Icon name="instagram" /></a>}
+      </div>
+    </div>
+
+    <nav aria-label="Diensten">
+      <h2 class="footer__title">Diensten</h2>
+      <ul class="footer__links">
+        {services.map((s) => <li><a href={serviceHref(s.slug)}>{s.navLabel}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-label="Werkgebied">
+      <h2 class="footer__title">Werkgebied</h2>
+      <ul class="footer__links">
+        <li><a href="/">Dakwerker Aalter en Knesselare</a></li>
+        {cities.map((c) => <li><a href={cityHref(c.slug)}>Dakwerker {c.city}</a></li>)}
+        <li><a href="/werkgebied/">Alle gemeenten</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Bedrijf">
+      <h2 class="footer__title">DSD Dakwerken</h2>
+      <ul class="footer__links">
+        <li><a href="/over-ons/">Over ons</a></li>
+        <li><a href="/realisaties/">Realisaties</a></li>
+        <li><a href="/diensten/">Alle diensten</a></li>
+        <li><a href="/contact/">Contact en offerte</a></li>
+        <li><a href="/privacybeleid/">Privacybeleid</a></li>
+      </ul>
+      <a class="btn btn--gold footer__cta" href="/contact/">Vraag een gratis offerte</a>
+    </nav>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <span>&copy; {year} {site.legalName}, {site.address.street}, {site.address.postalCode} {site.address.city}. BTW {site.vat}.</span>
+      <span>Website door <a href="https://lanello.io" target="_blank" rel="noopener">Lanello</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--c-ink); color: #cfc8ba; margin-top: 0; }
+  .footer a { color: #e9e4da; text-decoration: none; }
+  .footer a:hover { color: var(--c-gold); }
+  .footer__grid { display: grid; gap: var(--space-6); padding-block: var(--space-8) var(--space-6); grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; } }
+  .footer__logo { width: 200px; height: auto; margin-bottom: var(--space-4); }
+  .footer__title { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-md); color: var(--c-gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-4); }
+  .footer__links, .footer__contact { list-style: none; padding: 0; margin: 0; }
+  .footer__links li { margin-bottom: 0.45rem; }
+  .footer__contact li { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.75rem; }
+  .footer__contact svg { color: var(--c-gold); flex: none; margin-top: 0.2rem; }
+  .footer__hours { display: block; }
+  .footer__social { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
+  .footer__social a { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; }
+  .footer__social a:hover { border-color: var(--c-gold); }
+  .footer__cta { margin-top: var(--space-4); color: var(--c-ink) !important; }
+  .footer__cta:hover { color: var(--c-white) !important; }
+  .footer__bottom { border-top: 1px solid rgba(255,255,255,.12); font-size: var(--fs-xs); }
+  .footer__bottom-inner { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: space-between; padding-block: var(--space-4); }
+  .footer__bottom a { color: var(--c-gold); }
+</style>

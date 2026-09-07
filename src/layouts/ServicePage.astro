@@ -1,0 +1,155 @@
+---
+import { Image } from 'astro:assets';
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import Steps from '../components/Steps.astro';
+import PriceTable from '../components/PriceTable.astro';
+import Faq from '../components/Faq.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TrustBar from '../components/TrustBar.astro';
+import { site } from '../config/site';
+import { service, serviceHref } from '../data/services';
+import { cities, cityHref, servedTowns } from '../data/cities';
+import { photo, alt as altOf } from '../data/photos';
+import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema';
+import type { ServiceContent } from '../data/types';
+
+interface Props { content: ServiceContent }
+const { content: c } = Astro.props;
+const path = serviceHref(c.slug);
+const crumbs = [{ name: 'Diensten', href: '/diensten/' }, { name: c.name, href: path }];
+const schema = [
+  serviceSchema({ name: c.name, description: c.seo.description, path, areaServed: servedTowns.map((t) => t.name) }),
+  breadcrumbSchema(crumbs),
+  faqSchema(c.faq),
+];
+const related = c.related.map((slug) => service(slug)).map((s) => ({ name: s.name, href: serviceHref(s.slug), text: s.summary }));
+const secondPhoto = c.gallery?.[0]?.image ?? c.image;
+---
+<Base title={c.seo.title} description={c.seo.description} path={path} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+  <Hero h1={c.hero.h1} intro={c.hero.intro} image={c.image} imageAlt={c.imageAlt} eyebrow={`${c.name} in Aalter en het Meetjesland`} />
+  <TrustBar />
+
+  <section class="section" aria-labelledby="problem-title">
+    <div class="container split">
+      <div class="prose">
+        <span class="eyebrow">{c.name}</span>
+        <h2 id="problem-title" class="mt-0">{c.problem.heading}</h2>
+        {c.problem.paragraphs.map((p) => <p>{p}</p>)}
+        <div class="btn-row" style="margin-top:1.5rem">
+          <a class="btn btn--gold" href="/contact/">Gratis offerte aanvragen <Icon name="arrow-right" /></a>
+          <a class="btn btn--outline" href={`tel:${site.phoneE164}`}><Icon name="phone" /> {site.phoneDisplay}</a>
+        </div>
+      </div>
+      <div class="photo">
+        <Image src={photo(secondPhoto)} alt={c.gallery?.[0]?.alt ?? altOf(secondPhoto)} widths={[560, 900, 1200]} sizes="(min-width: 860px) 45vw, 92vw" format="webp" quality={72} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" aria-labelledby="included-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Wat is inbegrepen</span>
+        <h2 id="included-title">{c.included.heading}</h2>
+      </div>
+      <ul class="checklist included">
+        {c.included.items.map((i) => <li><Icon name="check-circle" /> <span>{i}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  {c.process ? <Steps heading={c.process.heading} steps={c.process.steps} intro="" /> : <Steps />}
+
+  <PriceTable heading={c.pricing.heading} intro={c.pricing.intro} rows={c.pricing.rows} note={c.pricing.note} />
+
+  <section class="section section--ink" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Waarom DSD Dakwerken</span>
+        <h2 id="why-title">{c.why.heading}</h2>
+      </div>
+      <div class="grid grid--3">
+        {c.why.items.map((f) => (
+          <div class="why__item">
+            <Icon name="shield-check" size={28} />
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="local-title">
+    <div class="container split">
+      <div class="prose">
+        <span class="eyebrow">Werkgebied</span>
+        <h2 id="local-title" class="mt-0">{c.local.heading}</h2>
+        {c.local.paragraphs.map((p) => <p>{p}</p>)}
+        <p>
+          Bekijk onze pagina's voor
+          {cities.map((ct, i) => <><a href={cityHref(ct.slug)}>{c.navLabel.toLowerCase()} in {ct.city}</a>{i < cities.length - 1 ? ', ' : ''}</>)}
+          of het volledige <a href="/werkgebied/">werkgebied</a>.
+        </p>
+      </div>
+      <div class="card card--flat local-card">
+        <h3>Ook in uw gemeente</h3>
+        <p class="muted small">Wij werken in een straal van ongeveer 30 km rond Aalter, onder meer in:</p>
+        <ul class="towns">
+          {servedTowns.slice(0, 24).map((t) => <li>{t.name}</li>)}
+        </ul>
+        <a href="/werkgebied/" class="btn btn--outline">Alle gemeenten <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  {c.gallery && c.gallery.length > 1 && (
+    <section class="section section--cream" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Realisaties</span>
+          <h2 id="gallery-title">Recente {c.navLabel.toLowerCase()} door DSD Dakwerken</h2>
+        </div>
+        <PhotoGrid items={c.gallery} />
+        <p style="margin-top:1.5rem"><a class="btn btn--ink" href="/realisaties/">Bekijk alle realisaties <Icon name="arrow-right" /></a></p>
+      </div>
+    </section>
+  )}
+
+  <Faq items={c.faq} heading={`Veelgestelde vragen over ${c.navLabel.toLowerCase()}`} />
+
+  <RelatedLinks heading="Gerelateerde diensten" items={related} />
+
+  <section class="section section--cream" aria-labelledby="cta-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Gratis en vrijblijvend</span>
+        <h2 id="cta-title" class="mt-0">{c.cta.heading}</h2>
+        <p class="lead">{c.cta.text}</p>
+        <ul class="checklist">
+          <li><Icon name="check" /> Antwoord binnen één werkdag</li>
+          <li><Icon name="check" /> Gratis plaatsbezoek en opmeting</li>
+          <li><Icon name="check" /> Duidelijke offerte met vaste prijzen</li>
+        </ul>
+        <a class="btn btn--ink" href={`tel:${site.phoneE164}`}><Icon name="phone" /> Bel {site.phoneDisplay}</a>
+      </div>
+      <ContactForm compact preselect={c.slug} heading="Vraag uw gratis offerte aan" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .included { display: grid; gap: 0.75rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); max-width: 60rem; }
+  .why__item svg { color: var(--c-gold); margin-bottom: var(--space-3); }
+  .why__item h3 { font-size: var(--fs-lg); color: var(--c-white); margin-bottom: var(--space-2); }
+  .why__item p { color: #cfc8ba; margin: 0; }
+  .local-card h3 { margin-bottom: var(--space-2); }
+  .towns { list-style: none; padding: 0; margin: 0 0 var(--space-4); display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .towns li { margin: 0; background: var(--c-cream); border: 1px solid var(--c-line); border-radius: 999px; padding: 0.25rem 0.7rem; font-size: var(--fs-sm); }
+</style>

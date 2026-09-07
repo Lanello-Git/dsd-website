@@ -1,0 +1,135 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+import { services } from '../data/services';
+
+interface Props {
+  heading?: string;
+  intro?: string;
+  compact?: boolean;
+  /** Pre-select a service in the dropdown. */
+  preselect?: string;
+}
+const { heading = 'Vraag uw gratis offerte aan', intro = 'Vul het formulier in en wij bellen u binnen één werkdag terug voor een gratis en vrijblijvend plaatsbezoek.', compact = false, preselect } = Astro.props;
+const endpoint = site.formEndpoint;
+const embed = site.ghlFormEmbedUrl;
+---
+<div class:list={['lead', { 'lead--compact': compact }]} id="offerte">
+  <div class="lead__head">
+    <h2 class="lead__title">{heading}</h2>
+    <p class="lead__intro">{intro}</p>
+  </div>
+
+  {embed ? (
+    <iframe src={embed} title="Offerteformulier DSD Dakwerken" class="lead__embed" loading="lazy"></iframe>
+  ) : (
+    <form class="lead__form" id="lead-form" method="post" action={endpoint || '#offerte'} data-endpoint={endpoint} novalidate>
+      <div class="field-grid">
+        <div class="field">
+          <label for="naam">Naam <span aria-hidden="true">*</span></label>
+          <input id="naam" name="naam" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="telefoon">Telefoon <span aria-hidden="true">*</span></label>
+          <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" inputmode="tel" required />
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="gemeente">Gemeente <span aria-hidden="true">*</span></label>
+          <input id="gemeente" name="gemeente" type="text" autocomplete="address-level2" required />
+        </div>
+        <div class="field field--full">
+          <label for="dienst">Waarvoor kunnen wij u helpen?</label>
+          <select id="dienst" name="dienst">
+            <option value="">Maak een keuze</option>
+            {services.map((s) => <option value={s.name} selected={preselect === s.slug}>{s.name}</option>)}
+            <option value="Andere">Andere</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="bericht">Uw vraag of omschrijving van de werken</label>
+          <textarea id="bericht" name="bericht" rows={compact ? 3 : 5}></textarea>
+        </div>
+        <div class="field field--full field--check">
+          <input id="akkoord" name="akkoord" type="checkbox" required />
+          <label for="akkoord">Ik ga akkoord dat DSD Dakwerken mijn gegevens gebruikt om mij te contacteren over mijn aanvraag. <a href="/privacybeleid/">Privacybeleid</a> <span aria-hidden="true">*</span></label>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+      </div>
+      <input type="hidden" name="bron" value="dsddakwerken.be" />
+      <button class="btn btn--gold btn--lg lead__submit" type="submit">Verstuur mijn aanvraag <Icon name="arrow-right" /></button>
+      <p class="lead__status" role="status" aria-live="polite"></p>
+      <p class="lead__alt">Liever bellen? <a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a> of mail naar <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </form>
+  )}
+</div>
+
+<script>
+  const form = document.getElementById('lead-form') as HTMLFormElement | null;
+  if (form) {
+    const status = form.querySelector('.lead__status') as HTMLParagraphElement;
+    const phone = form.querySelector('.lead__alt a')?.getAttribute('href') ?? '';
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      status.className = 'lead__status';
+      if ((form.elements.namedItem('website') as HTMLInputElement).value) return; // honeypot
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        status.textContent = 'Vul de verplichte velden in (naam, telefoon, gemeente en akkoord).';
+        status.classList.add('is-error');
+        return;
+      }
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        status.innerHTML = `Het formulier is nog niet gekoppeld. Bel ons even op <a href="${phone}">${phone.replace('tel:', '')}</a>, dan helpen wij u meteen verder.`;
+        status.classList.add('is-error');
+        return;
+      }
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true;
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+        if (!res.ok) throw new Error(String(res.status));
+        window.location.href = '/bedankt/';
+      } catch {
+        status.innerHTML = `Er liep iets mis bij het versturen. Bel ons op <a href="${phone}">${phone.replace('tel:', '')}</a> of probeer het later opnieuw.`;
+        status.classList.add('is-error');
+        btn.disabled = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .lead { background: var(--c-white); border: 1px solid var(--c-line); border-radius: var(--radius-lg); padding: var(--space-6); box-shadow: var(--shadow-lg); }
+  .lead--compact { padding: var(--space-5); }
+  .lead__title { font-size: var(--fs-xl); margin-bottom: var(--space-2); }
+  .lead__intro { color: var(--c-muted); margin-bottom: var(--space-5); }
+  .lead__embed { width: 100%; min-height: 640px; border: 0; }
+  .field-grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+  @media (min-width: 560px) { .field-grid { grid-template-columns: 1fr 1fr; } }
+  .field { display: grid; gap: 0.35rem; }
+  .field--full { grid-column: 1 / -1; }
+  .field label { font-weight: 600; font-size: var(--fs-sm); color: var(--c-ink); }
+  .field label span { color: var(--c-red); }
+  .field input, .field select, .field textarea {
+    font: inherit; padding: 0.75rem 0.9rem; border: 1px solid #cfc8ba; border-radius: var(--radius-sm); background: var(--c-white); color: var(--c-text); min-height: 48px; width: 100%;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--c-gold-deep); outline: 3px solid var(--c-gold-pale); outline-offset: 0; }
+  .field--check { grid-template-columns: auto 1fr; align-items: start; gap: 0.6rem; }
+  .field--check input { width: 1.25rem; height: 1.25rem; min-height: 0; margin-top: 0.2rem; accent-color: var(--c-gold-deep); }
+  .field--check label { font-weight: 400; }
+  .hp { position: absolute; left: -9999px; }
+  .lead__submit { width: 100%; margin-top: var(--space-5); }
+  .lead__status { margin: var(--space-3) 0 0; font-size: var(--fs-sm); }
+  .lead__status.is-error { color: var(--c-error); }
+  .lead__alt { margin-top: var(--space-4); font-size: var(--fs-sm); color: var(--c-muted); }
+</style>

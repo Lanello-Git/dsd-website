@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+---
+<Base title="Pagina niet gevonden | DSD Dakwerken" description="Deze pagina bestaat niet of is verplaatst." path="/404/" noindex>
+  <section class="section">
+    <div class="container prose text-center" style="margin-inline:auto">
+      <span class="eyebrow">Fout 404</span>
+      <h1>Deze pagina bestaat niet (meer)</h1>
+      <p class="lead" style="margin-inline:auto">Misschien is de pagina verplaatst. Bekijk onze diensten of neem contact op, wij helpen u graag verder.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:2rem">
+        <a class="btn btn--gold" href="/">Naar de startpagina</a>
+        <a class="btn btn--outline" href="/diensten/">Onze diensten</a>
+        <a class="btn btn--outline" href={`tel:${site.phoneE164}`}>Bel {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+</Base>

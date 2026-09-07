@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+---
+<Base title="Bedankt voor uw aanvraag | DSD Dakwerken" description="Wij hebben uw aanvraag goed ontvangen en bellen u binnen één werkdag terug." path="/bedankt/" noindex>
+  <section class="section">
+    <div class="container prose text-center" style="margin-inline:auto">
+      <Icon name="check-circle" size={56} class="thanks-icon" />
+      <h1>Bedankt, wij hebben uw aanvraag goed ontvangen</h1>
+      <p class="lead" style="margin-inline:auto">Peter of iemand van het team belt u binnen één werkdag terug om een afspraak te maken voor een gratis plaatsbezoek.</p>
+      <p>Is het dringend, bijvoorbeeld bij een lek of stormschade? Bel ons dan meteen op <a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a>.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:2rem">
+        <a class="btn btn--gold" href="/">Terug naar de startpagina</a>
+        <a class="btn btn--outline" href="/realisaties/">Bekijk onze realisaties</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  :global(.thanks-icon) { color: var(--c-success); margin: 0 auto var(--space-4); }
+</style>

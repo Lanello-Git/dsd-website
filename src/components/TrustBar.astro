@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+const items = [
+  { icon: 'award', big: `${site.experienceYears}+ jaar`, text: 'ervaring in dakwerken en renovaties' },
+  { icon: 'shield-check', big: '10 jaar', text: 'garantie op waterdichtheid' },
+  { icon: 'users', big: 'Eigen ploeg', text: 'geen onderaannemers, Peter is zelf op de werf' },
+  { icon: 'home', big: `${site.projectsLast3Years}+`, text: 'projecten in de laatste 3 jaar' },
+];
+---
+<section class="trust" aria-label="Waarom klanten voor DSD Dakwerken kiezen">
+  <div class="container trust__grid">
+    {items.map((i) => (
+      <div class="trust__item">
+        <Icon name={i.icon as any} size={30} />
+        <div><strong>{i.big}</strong><span>{i.text}</span></div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust { background: var(--c-gold); color: var(--c-ink); }
+  .trust__grid { display: grid; gap: var(--space-4); padding-block: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .trust__item { display: flex; gap: 0.8rem; align-items: center; }
+  .trust__item svg { flex: none; }
+  .trust__item strong { display: block; font-family: var(--font-display); font-size: var(--fs-xl); line-height: 1.1; }
+  .trust__item span { font-size: var(--fs-sm); font-weight: 600; }
+</style>

@@ -1,0 +1,164 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { cities, cityHref, servedTowns } from '../data/cities';
+import { photo, alt as altOf } from '../data/photos';
+import { faqSchema } from '../lib/schema';
+
+const faq = [
+  { q: 'Wat kost een nieuw dak of een dakrenovatie?', a: 'Een volledige dakrenovatie van een hellend dak kost in 2026 gemiddeld 150 tot 220 euro per m², exclusief btw, inclusief nieuw onderdak, isolatie en dakpannen. Een plat dak in EPDM kost 55 tot 90 euro per m². Voor woningen ouder dan 10 jaar betaalt u 6% btw. Na een gratis plaatsbezoek krijgt u van ons een offerte met vaste prijzen.' },
+  { q: 'Geven jullie garantie op de werken?', a: 'Ja, DSD Dakwerken geeft 10 jaar garantie op de waterdichtheid van elk dak dat wij plaatsen of renoveren. Daarbovenop geldt de fabrieksgarantie op dakpannen, EPDM, isolatie en dakramen. Als geregistreerd aannemer vallen wij ook onder de wettelijke tienjarige aansprakelijkheid.' },
+  { q: 'Werken jullie met onderaannemers?', a: 'Nee. Peter De Smet voert alle werken uit met zijn eigen vaste ploeg. De man die uw offerte opmaakt, staat ook op uw dak. Zo houden wij de kwaliteit, de planning en de communicatie in eigen handen.' },
+  { q: 'In welke regio werken jullie?', a: 'Wij werken vanuit Knesselare (Aalter) in een straal van ongeveer 30 km: Aalter, Knesselare, Eeklo, Maldegem, Deinze, Gent, Brugge, Beernem, Lievegem, Tielt en de gemeenten daartussen. Op onze pagina werkgebied vindt u de volledige lijst.' },
+  { q: 'Hoe snel kunnen jullie starten?', a: 'Voor een lek of stormschade komen wij zo snel mogelijk langs, meestal binnen enkele dagen. Een volledige dakrenovatie plannen wij enkele weken tot maanden vooruit, afhankelijk van het seizoen. Bij het plaatsbezoek krijgt u van ons een realistische startdatum, en die houden wij ook aan.' },
+  { q: 'Kan ik 6% btw krijgen op dakwerken?', a: 'Ja, als uw woning minstens 10 jaar oud is en hoofdzakelijk privé bewoond wordt, betaalt u 6% btw in plaats van 21% op dakwerken en renovatiewerken. Voorwaarde is dat wij als aannemer de materialen leveren en plaatsen en samen factureren. Wij zetten de verplichte verklaring op de factuur.' },
+  { q: 'Krijg ik een premie voor dakisolatie?', a: 'Via Mijn VerbouwPremie kunt u in Vlaanderen een premie krijgen voor dakisolatie, afhankelijk van uw inkomenscategorie. De isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen en geplaatst zijn door een aannemer. De voorwaarden veranderen regelmatig, dus kijk ze na op vlaanderen.be. Wij bezorgen u alle attesten die u nodig hebt.' },
+  { q: 'Doen jullie ook kleine herstellingen?', a: 'Ja. Een lek opsporen, enkele dakpannen vervangen, een dakgoot herstellen of stormschade oplossen: ook voor kleine dakwerken komen wij langs. Wij vinden dat u een kleine herstelling beter meteen laat doen dan te wachten tot de schade groter wordt.' },
+];
+const projects = [
+  { image: 'dakrenovatie-villa-luchtfoto', caption: 'Volledige dakrenovatie met nieuwe kleidakpannen' },
+  { image: 'uitbouw-houten-gevelbekleding-plat-dak', caption: 'Uitbouw met houten gevelbekleding en plat dak' },
+  { image: 'hoeve-renovatie-nieuw-dak-luchtfoto', caption: 'Hoeve met volledig nieuw pannendak' },
+  { image: 'nieuw-pannendak-woning-rode-pannen', caption: 'Nieuw hellend dak in rode kleidakpannen' },
+  { image: 'houten-gevelbekleding-gevel-ramen', caption: 'Gevel afgewerkt met verticale houten gevelbekleding' },
+  { image: 'onderdak-plaatsen-dakrenovatie', caption: 'Nieuw onderdak en isolatie tijdens een dakrenovatie' },
+];
+---
+<Base
+  title="Dakwerker Aalter | Dakwerken en renovaties | DSD Dakwerken"
+  description="DSD Dakwerken is uw dakwerker in Aalter en het Meetjesland: dakrenovatie, hellende en platte daken, dakisolatie, dakramen en renovaties. 30+ jaar ervaring, 10 jaar garantie. Vraag een gratis offerte aan."
+  path="/"
+  schema={[faqSchema(faq)]}
+>
+  <Hero
+    variant="home"
+    eyebrow="Dakwerker in Aalter, Knesselare en het Meetjesland"
+    h1="Dakwerken en renovaties, kwalitatief en op tijd"
+    intro="DSD Dakwerken is uw dakwerker in Aalter voor hellende en platte daken, dakisolatie, dakramen en totaalrenovaties. Peter De Smet en zijn eigen ploeg, meer dan 30 jaar ervaring en 10 jaar garantie op waterdichtheid."
+    image="hoeve-renovatie-nieuw-dak-luchtfoto"
+    imageAlt="Luchtfoto van een gerenoveerde hoeve met nieuw pannendak door DSD Dakwerken in het Meetjesland"
+  />
+  <TrustBar />
+
+  <ServiceCards heading="Dakwerken en renovaties door één vakman" intro="Van een lekkende dakgoot tot een volledig nieuw dak of een verbouwing van uw woning: DSD Dakwerken doet het met eigen mensen en eigen materiaal." />
+
+  <section class="section section--cream" aria-labelledby="why-title">
+    <div class="container split">
+      <div class="photo photo--tall">
+        <Image src={photo('dakwerkers-op-dak-stelling-verreiker')} alt={altOf('dakwerkers-op-dak-stelling-verreiker')} widths={[560, 900, 1200]} sizes="(min-width: 860px) 45vw, 92vw" format="webp" quality={72} />
+      </div>
+      <div>
+        <span class="eyebrow">Waarom DSD Dakwerken</span>
+        <h2>Correcte prijzen, eigen vakmensen en een dak dat dicht blijft</h2>
+        <p class="lead">Peter De Smet staat al meer dan 30 jaar op daken in het Meetjesland. Dat merkt u aan het advies, aan de afwerking en aan de prijs.</p>
+        <ul class="checklist why-list">
+          <li><Icon name="check-circle" /><span><strong>Correcte prijzen.</strong> Een duidelijke offerte met vaste prijzen. Wat wij afspreken, is wat u betaalt.</span></li>
+          <li><Icon name="check-circle" /><span><strong>Geen onderaannemers.</strong> Peter en zijn eigen ploeg voeren alle werken zelf uit. Eén aanspreekpunt van offerte tot oplevering.</span></li>
+          <li><Icon name="check-circle" /><span><strong>10 jaar garantie op waterdichtheid.</strong> Op elk dak dat wij plaatsen of renoveren, bovenop de fabrieksgarantie.</span></li>
+          <li><Icon name="check-circle" /><span><strong>Kwaliteitsmaterialen.</strong> Dakpannen van Wienerberger Koramic, materialen van APOK, dakramen van VELUX. Wij werken volgens de normen van Embuild.</span></li>
+          <li><Icon name="check-circle" /><span><strong>Op tijd.</strong> Een afgesproken startdatum is een afgesproken startdatum. Wij plannen realistisch en houden ons eraan.</span></li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn--gold" href="/over-ons/">Maak kennis met Peter <Icon name="arrow-right" /></a>
+          <a class="btn btn--outline" href="/contact/">Vraag een gratis offerte</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="projects-title">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Realisaties</span>
+        <h2 id="projects-title">Recent werk in Aalter en omgeving</h2>
+        <p class="lead" style="margin-inline:auto">Echte daken en gevels van klanten in het Meetjesland, geen stockfoto's. Van een volledige <a href="/dakrenovatie/">dakrenovatie</a> tot een uitbouw met <a href="/gevelbekleding/">houten gevelbekleding</a>.</p>
+      </div>
+      <PhotoGrid items={projects} />
+      <p class="text-center" style="margin-top:2rem"><a class="btn btn--ink" href="/realisaties/">Bekijk alle realisaties <Icon name="arrow-right" /></a></p>
+    </div>
+  </section>
+
+  <section class="section section--ink" aria-labelledby="about-title">
+    <div class="container split split--reverse">
+      <div>
+        <span class="eyebrow">Over ons</span>
+        <h2 id="about-title">Peter De Smet, dakwerker uit Knesselare met meer dan 30 jaar ervaring</h2>
+        <p class="lead">DSD Dakwerken is het bedrijf van Peter De Smet. Peter staat al meer dan 30 jaar op daken in het Meetjesland en werkt vandaag samen met zijn zoon en een vaste ploeg vakmensen.</p>
+        <p>Geen onderaannemers, geen tussenpersonen: de man die uw dak komt bekijken en uw offerte opmaakt, staat ook op uw werf. Peter houdt van eenvoud: een eerlijk advies, een correcte prijs en werk dat afgewerkt is zoals het hoort. Daarom kiezen klanten uit <a href="/werkgebied/dakwerker-gent/">Gent</a>, <a href="/werkgebied/dakwerker-brugge/">Brugge</a>, <a href="/werkgebied/dakwerker-eeklo/">Eeklo</a> en heel de streek voor DSD.</p>
+        <a class="btn btn--gold" href="/over-ons/">Lees ons verhaal <Icon name="arrow-right" /></a>
+      </div>
+      <div class="photo">
+        <Image src={photo('bestelwagen-dsd-dakwerken-voor-woning')} alt={altOf('bestelwagen-dsd-dakwerken-voor-woning')} widths={[560, 900, 1200]} sizes="(min-width: 860px) 45vw, 92vw" format="webp" quality={72} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="area-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Werkgebied</span>
+        <h2 id="area-title">Actief in Aalter en heel het Meetjesland, van Gent tot Brugge</h2>
+        <p class="lead">Vanuit Knesselare werken wij in een straal van ongeveer 30 km. Voor deze steden hebben wij een eigen pagina met lokale informatie:</p>
+      </div>
+      <div class="grid grid--3 area-grid">
+        <a class="card card--flat area-card" href="/">
+          <Icon name="map-pin" />
+          <strong>Aalter en Knesselare</strong>
+          <span class="muted small">Onze thuisbasis, ook Bellem, Lotenhulle, Ursel en Sint-Maria-Aalter</span>
+        </a>
+        {cities.map((c) => (
+          <a class="card card--flat area-card" href={cityHref(c.slug)}>
+            <Icon name="map-pin" />
+            <strong>Dakwerker {c.city}</strong>
+            <span class="muted small">{c.distanceKm} km van Aalter, ook {c.neighbourhoods.items.slice(0, 3).join(', ')}</span>
+          </a>
+        ))}
+      </div>
+      <p class="towns-line small muted">Ook in {servedTowns.filter((t) => !t.page && !['Aalter', 'Knesselare'].includes(t.name)).map((t) => t.name).join(', ')}. <a href="/werkgebied/">Bekijk het volledige werkgebied</a>.</p>
+    </div>
+  </section>
+
+  <Steps />
+
+  <Faq items={faq} heading="Veelgestelde vragen aan uw dakwerker" />
+
+  <section class="section section--cream" aria-labelledby="contact-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h2 id="contact-title">Vraag vandaag uw gratis offerte aan</h2>
+        <p class="lead">Bel, sms of vul het formulier in. Peter komt gratis en vrijblijvend langs en u krijgt een duidelijke offerte met vaste prijzen.</p>
+        <ul class="contact-list">
+          <li><Icon name="phone" /><div><strong>Bel of sms</strong><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a></div></li>
+          <li><Icon name="mail" /><div><strong>E-mail</strong><a href={`mailto:${site.email}`}>{site.email}</a></div></li>
+          <li><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}, {site.address.postalCode} {site.address.city} ({site.address.subMunicipality})</span></div></li>
+          <li><Icon name="clock" /><div><strong>Bereikbaar</strong>{site.hours.map((h) => <span>{h.days}: {h.open} - {h.close}</span>)}</div></li>
+        </ul>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .photo--tall :global(img) { aspect-ratio: 4 / 5; }
+  .why-list li { margin-bottom: 0.9rem; }
+  .area-card { display: grid; gap: 0.25rem; text-decoration: none; color: var(--c-ink); }
+  .area-card:hover { border-color: var(--c-gold); color: var(--c-ink); }
+  .area-card svg { color: var(--c-gold-deep); margin-bottom: 0.25rem; }
+  .towns-line { margin-top: var(--space-5); max-width: 60rem; }
+  .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); }
+  .contact-list li { display: flex; gap: 0.9rem; align-items: flex-start; margin: 0; }
+  .contact-list svg { color: var(--c-gold-deep); flex: none; margin-top: 0.15rem; }
+  .contact-list strong { display: block; }
+  .contact-list a, .contact-list span { display: block; }
+</style>

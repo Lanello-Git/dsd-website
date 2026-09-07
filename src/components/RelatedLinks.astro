@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+interface Props { heading: string; items: { name: string; href: string; text?: string }[]; eyebrow?: string }
+const { heading, items, eyebrow = 'Ook interessant' } = Astro.props;
+---
+<section class="section section--tight related" aria-labelledby="related-title">
+  <div class="container">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2 id="related-title">{heading}</h2>
+    <div class="grid grid--3">
+      {items.map((i) => (
+        <a class="card card--flat related__card" href={i.href}>
+          <strong>{i.name}</strong>
+          {i.text && <span class="muted small">{i.text}</span>}
+          <Icon name="arrow-right" size={18} />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .related__card { display: grid; gap: 0.3rem; text-decoration: none; color: var(--c-ink); position: relative; padding-right: 3rem; }
+  .related__card:hover { border-color: var(--c-gold); color: var(--c-ink); }
+  .related__card svg { position: absolute; right: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--c-gold-deep); }
+</style>
