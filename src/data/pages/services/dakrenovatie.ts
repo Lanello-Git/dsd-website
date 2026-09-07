@@ -10,7 +10,7 @@ const content: ServiceContent = {
   summary: 'Een volledig nieuw dak met nieuw onderdak, isolatie en dakpannen of leien. Waterdicht, energiezuinig en 10 jaar garantie.',
   seo: {
     title: 'Dakrenovatie Aalter en Meetjesland | DSD Dakwerken',
-    description: 'Dakrenovatie door DSD Dakwerken: nieuw onderdak, isolatie en dakpannen met 10 jaar garantie op waterdichtheid. Eigen ploeg, correcte prijzen. Vraag een gratis offerte aan.',
+    description: 'Dakrenovatie door DSD Dakwerken: nieuw onderdak, isolatie en dakpannen, 10 jaar garantie op waterdichtheid. Eigen ploeg, correcte prijzen. Gratis offerte.',
     keyword: 'dakrenovatie',
     secondary: ['dak renoveren prijs', 'premie dakrenovatie', 'nieuw dak Aalter'],
   },

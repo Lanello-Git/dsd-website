@@ -27,6 +27,16 @@ export const services: ServiceContent[] = serviceSlugs.map((slug) => {
   return mod.default;
 });
 
+for (const key of ['navLabel', 'name'] as const) {
+  const seen = new Set(services.map((s) => s[key]));
+  if (seen.size !== services.length) throw new Error(`Duplicate service ${key} detected; every service page needs its own ${key}`);
+}
+for (const key of ['title', 'description'] as const) {
+  const seen = new Set(services.map((s) => s.seo[key]));
+  if (seen.size !== services.length) throw new Error(`Duplicate service seo.${key} detected`);
+}
+if (new Set(services.map((s) => s.hero.h1)).size !== services.length) throw new Error('Duplicate service H1 detected');
+
 export function service(slug: string): ServiceContent {
   const s = services.find((x) => x.slug === slug);
   if (!s) throw new Error(`Unknown service slug "${slug}"`);

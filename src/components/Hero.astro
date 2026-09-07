@@ -19,7 +19,7 @@ const { h1, intro, image, imageAlt, eyebrow, variant = 'page', primaryLabel = 'V
 ---
 <section class:list={['hero', `hero--${variant}`]}>
   <div class="hero__media">
-    <Image src={photo(image)} alt={imageAlt} widths={[640, 960, 1400, 1800]} sizes="100vw" loading="eager" fetchpriority="high" format="webp" quality={72} />
+    <Image src={photo(image)} alt={imageAlt} widths={[640, 960, 1400, 1800]} sizes="(min-width: 1800px) 1800px, 100vw" loading="eager" fetchpriority="high" format="webp" quality={64} />
   </div>
   <div class="container hero__inner">
     <div class="hero__content">

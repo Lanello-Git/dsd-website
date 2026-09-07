@@ -23,7 +23,7 @@ const { content: c } = Astro.props;
 const path = serviceHref(c.slug);
 const crumbs = [{ name: 'Diensten', href: '/diensten/' }, { name: c.name, href: path }];
 const schema = [
-  serviceSchema({ name: c.name, description: c.seo.description, path, areaServed: servedTowns.map((t) => t.name) }),
+  serviceSchema({ name: c.name, description: c.seo.description, path, areaServed: ['Aalter', ...cities.map((ct) => ct.city)] }),
   breadcrumbSchema(crumbs),
   faqSchema(c.faq),
 ];

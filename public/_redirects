@@ -1,6 +1,0 @@
-# Netlify / Cloudflare Pages style redirects (same map as .htaccess)
-/dakwerken        /diensten/          301
-/renovaties       /renovatiewerken/   301
-/velux-ramen      /dakramen/          301
-/daken-ontmossen  /dak-ontmossen/     301
-/typography       /                   301

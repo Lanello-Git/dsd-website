@@ -22,11 +22,11 @@ Home page owns the home city term ("dakwerker Aalter"). Knesselare is covered on
 | 14 | Werkgebied (hub) | /werkgebied/ | dakwerker Meetjesland | dakwerker Oost-Vlaanderen, dakwerker in de buurt | local |
 | 15 | Dakwerker Gent | /werkgebied/dakwerker-gent/ | dakwerker Gent | dakwerken Gent, dakrenovatie Gent, dakwerker Drongen | local |
 | 16 | Dakwerker Brugge | /werkgebied/dakwerker-brugge/ | dakwerker Brugge | dakwerken Brugge, dakrenovatie Brugge, dakwerker Sint-Andries | local |
-| 17 | Dakwerker Eeklo | /werkgebied/dakwerker-eeklo/ | dakwerker Eeklo | dakwerken Eeklo, dakrenovatie Eeklo, dakwerker Meetjesland | local |
+| 17 | Dakwerker Eeklo | /werkgebied/dakwerker-eeklo/ | dakwerker Eeklo | dakwerken Eeklo, dakrenovatie Eeklo, dakwerker Kaprijke | local |
 | 18 | Dakwerker Deinze | /werkgebied/dakwerker-deinze/ | dakwerker Deinze | dakwerken Deinze, dakrenovatie Deinze, dakwerker Nevele | local |
 | 19 | Dakwerker Maldegem | /werkgebied/dakwerker-maldegem/ | dakwerker Maldegem | dakwerken Maldegem, dakrenovatie Adegem, dakwerker Kleit | local |
 | 20 | Contact en offerte | /contact/ | dakwerker offerte Aalter | gratis offerte dakwerken, contact DSD Dakwerken | conversion |
 
 Utility pages (not counted): /privacybeleid/ (GDPR), /bedankt/ (after form, noindex), /404.
 
-Old URLs redirected (in public/.htaccess and public/_redirects): /dakwerken, /renovaties, /velux-ramen, /daken-ontmossen, /typography. /contact and /gevelbekleding keep their URL.
+Old URLs redirected (in public/.htaccess): /dakwerken, /renovaties, /velux-ramen, /daken-ontmossen, /typography. /contact and /gevelbekleding keep their URL.

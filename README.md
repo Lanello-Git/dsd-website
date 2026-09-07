@@ -25,7 +25,7 @@ node scripts/similarity.mjs   # checks city and service pages for too much text 
 | Home, over ons, diensten, werkgebied, realisaties, contact, privacy | `src/pages/` |
 | Design tokens (colours, type, spacing) | `src/styles/global.css` |
 | Photos (real DSD job photos, EXIF stripped) | `src/assets/photos/` |
-| Redirects from the old site, caching | `public/.htaccess` (Apache/LiteSpeed) and `public/_redirects` (Netlify/Cloudflare) |
+| Redirects from the old site, caching, HTTPS | `public/.htaccess` (Apache/LiteSpeed on Hostinger) |
 | Content rules for writers | `docs/content-brief.md` |
 | Page and keyword plan | `docs/page-plan.md` |
 

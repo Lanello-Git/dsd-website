@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
       </a>
       <p>Dakwerken en renovaties, kwalitatief en op tijd. Eigen vakmensen, geen onderaannemers, {site.guarantee.toLowerCase()}.</p>
       <ul class="footer__contact">
-        <li><Icon name="map-pin" size={18} /><span>{site.address.street}<br />{site.address.postalCode} {site.address.city} ({site.address.subMunicipality})</span></li>
+        <li><Icon name="map-pin" size={18} /><span>{site.address.street}<br />{site.address.postalCode} {site.address.city}<br /><span class="small">Gevestigd in {site.address.subMunicipality}</span></span></li>
         <li><Icon name="phone" size={18} /><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a></li>
         <li><Icon name="mail" size={18} /><a href={`mailto:${site.email}`}>{site.email}</a></li>
         <li><Icon name="clock" size={18} /><span>{site.hours.map((h) => <span class="footer__hours">{h.days}: {h.open} - {h.close}</span>)}</span></li>

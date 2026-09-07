@@ -8,8 +8,6 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/404') && !page.includes('/bedankt'),
-      changefreq: 'monthly',
-      priority: 0.7,
     }),
   ],
   image: {

@@ -36,6 +36,9 @@ export function serviceSchema(opts: { name: string; description: string; path: s
     description: opts.description,
     url: new URL(opts.path, site.url).href,
     provider: { '@id': `${site.url}/#business` },
-    areaServed: opts.areaServed.map((n) => ({ '@type': 'City', name: n })),
+    areaServed: [
+      { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng }, geoRadius: '30000' },
+      ...opts.areaServed.map((n) => ({ '@type': 'City', name: n })),
+    ],
   };
 }

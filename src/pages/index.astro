@@ -35,14 +35,14 @@ const projects = [
 ---
 <Base
   title="Dakwerker Aalter | Dakwerken en renovaties | DSD Dakwerken"
-  description="DSD Dakwerken is uw dakwerker in Aalter en het Meetjesland: dakrenovatie, hellende en platte daken, dakisolatie, dakramen en renovaties. 30+ jaar ervaring, 10 jaar garantie. Vraag een gratis offerte aan."
+  description="Dakwerker in Aalter en het Meetjesland: dakrenovatie, platte en hellende daken, isolatie en dakramen. 30+ jaar ervaring, 10 jaar garantie. Gratis offerte."
   path="/"
   schema={[faqSchema(faq)]}
 >
   <Hero
     variant="home"
     eyebrow="Dakwerker in Aalter, Knesselare en het Meetjesland"
-    h1="Dakwerken en renovaties, kwalitatief en op tijd"
+    h1="Dakwerker in Aalter: dakwerken en renovaties, kwalitatief en op tijd"
     intro="DSD Dakwerken is uw dakwerker in Aalter voor hellende en platte daken, dakisolatie, dakramen en totaalrenovaties. Peter De Smet en zijn eigen ploeg, meer dan 30 jaar ervaring en 10 jaar garantie op waterdichtheid."
     image="hoeve-renovatie-nieuw-dak-luchtfoto"
     imageAlt="Luchtfoto van een gerenoveerde hoeve met nieuw pannendak door DSD Dakwerken in het Meetjesland"
@@ -140,7 +140,7 @@ const projects = [
         <ul class="contact-list">
           <li><Icon name="phone" /><div><strong>Bel of sms</strong><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a></div></li>
           <li><Icon name="mail" /><div><strong>E-mail</strong><a href={`mailto:${site.email}`}>{site.email}</a></div></li>
-          <li><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}, {site.address.postalCode} {site.address.city} ({site.address.subMunicipality})</span></div></li>
+          <li><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}, {site.address.postalCode} {site.address.city}</span><span class="small muted">Gevestigd in {site.address.subMunicipality}, deelgemeente van {site.address.city}</span></div></li>
           <li><Icon name="clock" /><div><strong>Bereikbaar</strong>{site.hours.map((h) => <span>{h.days}: {h.open} - {h.close}</span>)}</div></li>
         </ul>
       </div>

@@ -20,6 +20,15 @@ export const cities: CityContent[] = citySlugs.map((slug) => {
   return mod.default;
 });
 
+for (const key of ['title', 'description'] as const) {
+  const seen = new Set(cities.map((c) => c.seo[key]));
+  if (seen.size !== cities.length) throw new Error(`Duplicate city seo.${key} detected`);
+}
+for (const c of cities) {
+  if (c.nearby.includes(c.slug)) throw new Error(`City ${c.slug} lists itself in nearby`);
+  for (const n of c.nearby) if (!citySlugs.includes(n as CitySlug)) throw new Error(`City ${c.slug} has unknown nearby slug ${n}`);
+}
+
 export function city(slug: string): CityContent {
   const c = cities.find((x) => x.slug === slug);
   if (!c) throw new Error(`Unknown city slug "${slug}"`);
@@ -34,6 +43,7 @@ export const servedTowns: { name: string; province: 'Oost-Vlaanderen' | 'West-Vl
   { name: 'Knesselare', province: 'Oost-Vlaanderen' },
   { name: 'Bellem', province: 'Oost-Vlaanderen' },
   { name: 'Lotenhulle', province: 'Oost-Vlaanderen' },
+  { name: 'Poeke', province: 'Oost-Vlaanderen' },
   { name: 'Ursel', province: 'Oost-Vlaanderen' },
   { name: 'Sint-Maria-Aalter', province: 'Oost-Vlaanderen' },
   { name: 'Gent', province: 'Oost-Vlaanderen', page: 'dakwerker-gent' },

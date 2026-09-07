@@ -16,7 +16,7 @@ const faq = [
   { q: 'Wat doe ik bij een lek of stormschade?', a: 'Bel ons meteen op 0478 67 25 82. Zet intussen een emmer onder het lek en blijf zelf van het dak. Wij komen zo snel mogelijk langs om het dak voorlopig dicht te maken en plannen daarna de definitieve herstelling.' },
 ];
 ---
-<Base title="Contact en gratis offerte | DSD Dakwerken Aalter" description="Contacteer DSD Dakwerken in Aalter (Knesselare) voor een gratis offerte: bel 0478 67 25 82, mail naar info@dsddakwerken.be of vul het formulier in. Wij bellen u binnen één werkdag terug." path="/contact/" schema={[breadcrumbSchema(crumbs), faqSchema(faq)]}>
+<Base title="Contact en gratis offerte | DSD Dakwerken Aalter" description="Contacteer DSD Dakwerken in Aalter voor een gratis offerte: bel 0478 67 25 82, mail of vul het formulier in. Wij bellen u binnen één werkdag terug." path="/contact/" schema={[breadcrumbSchema(crumbs), faqSchema(faq)]}>
   <Breadcrumbs items={crumbs} />
 
   <section class="section contact-hero">
@@ -31,7 +31,7 @@ const faq = [
           <ul class="contact-cards">
             <li class="card card--flat"><Icon name="phone" /><div><strong>Bel of sms</strong><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a><span class="muted small">Ook voor dringende herstellingen</span></div></li>
             <li class="card card--flat"><Icon name="mail" /><div><strong>E-mail</strong><a href={`mailto:${site.email}`}>{site.email}</a><span class="muted small">Stuur gerust foto's mee</span></div></li>
-            <li class="card card--flat"><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}<br />{site.address.postalCode} {site.address.city} ({site.address.subMunicipality})</span><span class="muted small">Bezoek enkel op afspraak</span></div></li>
+            <li class="card card--flat"><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}<br />{site.address.postalCode} {site.address.city}</span><span class="muted small">Gevestigd in {site.address.subMunicipality}, bezoek enkel op afspraak</span></div></li>
             <li class="card card--flat"><Icon name="clock" /><div><strong>Bereikbaar</strong>{site.hours.map((h) => <span>{h.days}: {h.open} - {h.close}</span>)}</div></li>
           </ul>
           <div class="map" id="map" data-src={`https://www.google.com/maps?q=${mapQuery}&output=embed&hl=nl`}>
