@@ -17,6 +17,7 @@ const { items, columns = 3 } = Astro.props;
   .photo-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
   .photo-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
   .photo-grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+  @media (min-width: 900px) { .photo-grid--3 { grid-template-columns: repeat(3, 1fr); } }
   .photo-grid__item { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--c-cream); border: 1px solid var(--c-line); }
   .photo-grid__item :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   .photo-grid__item figcaption { padding: 0.7rem 0.9rem; font-size: var(--fs-sm); color: var(--c-muted); }

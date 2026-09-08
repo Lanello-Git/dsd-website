@@ -1,6 +1,6 @@
 ---
-import '@fontsource/dm-serif-display';
-import '@fontsource-variable/source-sans-3';
+import '@fontsource/dm-serif-display/latin.css';
+import '@fontsource-variable/source-sans-3/latin.css';
 import '../styles/global.css';
 import dmSerifWoff2 from '@fontsource/dm-serif-display/files/dm-serif-display-latin-400-normal.woff2?url';
 import sourceSansWoff2 from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
@@ -93,12 +93,12 @@ const jsonLd = [localBusiness, ...schema];
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="geo.region" content="BE-VOV" />
     <meta name="geo.placename" content={site.address.city} />
-    {jsonLd.map((obj) => <script is:inline type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+    {jsonLd.map((obj) => <script is:inline type="application/ld+json" set:html={JSON.stringify(obj).replace(/</g, '\\u003c')} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">Ga naar de inhoud</a>
     <Header />
-    <main id="main">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer />

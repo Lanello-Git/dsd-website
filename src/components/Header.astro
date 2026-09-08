@@ -6,7 +6,7 @@ import { site } from '../config/site';
 import { services, serviceHref } from '../data/services';
 
 const current = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+const isActive = (href: string, children?: { href: string }[]) => (href === '/' ? current === '/' : current.startsWith(href) || Boolean(children?.some((c) => current.startsWith(c.href))));
 const nav = [
   { label: 'Diensten', href: '/diensten/', children: services.map((s) => ({ label: s.navLabel, href: serviceHref(s.slug) })) },
   { label: 'Realisaties', href: '/realisaties/' },
@@ -32,7 +32,7 @@ const nav = [
       <ul class="nav__list">
         {nav.map((item) => (
           <li class:list={['nav__item', { 'nav__item--has-children': item.children }]}>
-            <a href={item.href} class:list={['nav__link', { 'is-active': isActive(item.href) }]} aria-current={isActive(item.href) ? 'page' : undefined}>
+            <a href={item.href} class:list={['nav__link', { 'is-active': isActive(item.href, item.children) }]} aria-current={current === item.href ? 'page' : undefined}>
               {item.label}
               {item.children && <Icon name="chevron-down" size={16} class="nav__caret" />}
             </a>
@@ -59,7 +59,7 @@ const nav = [
     </nav>
 
     <div class="header__actions">
-      <a class="btn btn--gold header__call" href={`tel:${site.phoneE164}`}><Icon name="phone" /><span>{site.phoneDisplay}</span></a>
+      <a class="btn btn--gold header__call" href={`tel:${site.phoneE164}`} aria-label={`Bel ${site.phoneDisplay}`}><Icon name="phone" /><span>{site.phoneDisplay}</span></a>
       <a class="btn btn--outline header__quote" href="/contact/">Gratis offerte</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" id="menu-btn">
         <Icon name="menu" class="menu-btn__open" />
@@ -78,11 +78,14 @@ const nav = [
     btn.setAttribute('aria-expanded', String(!open));
     nav?.classList.toggle('is-open', !open);
     document.body.classList.toggle('nav-open', !open);
+    if (!open) window.setTimeout(() => nav?.querySelector<HTMLAnchorElement>('a')?.focus(), 220);
+    else btn.focus();
   });
   document.querySelectorAll<HTMLButtonElement>('.nav__toggle').forEach((t) => {
     t.addEventListener('click', () => {
       const open = t.getAttribute('aria-expanded') === 'true';
       t.setAttribute('aria-expanded', String(!open));
+      t.setAttribute('aria-label', `${open ? 'Open' : 'Sluit'} submenu`);
       t.closest('.nav__item')?.classList.toggle('is-open', !open);
     });
   });
@@ -97,7 +100,7 @@ const nav = [
   .topbar__inner { display: flex; gap: var(--space-5); justify-content: flex-end; padding-block: 0.45rem; }
   .topbar span, .topbar a { display: inline-flex; align-items: center; gap: 0.4rem; color: inherit; text-decoration: none; }
   .topbar a:hover { color: var(--c-gold); }
-  @media (max-width: 859px) { .topbar { display: none; } }
+  @media (max-width: 1099px) { .topbar { display: none; } }
 
   .header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--header-h); }
   .brand img { width: 190px; height: auto; }
@@ -128,8 +131,8 @@ const nav = [
     .header__call span { display: none; }
     .header__call { padding: 0; width: 48px; height: 48px; }
     .menu-btn { display: grid; }
-    .nav { position: fixed; inset: var(--header-h) 0 0 0; background: var(--c-white); overflow-y: auto; padding: var(--space-4) var(--space-4) var(--space-8); transform: translateX(100%); transition: transform .2s ease; }
-    .nav.is-open { transform: none; }
+    .nav { position: fixed; inset: var(--header-h) 0 0 0; background: var(--c-white); overflow-y: auto; padding: var(--space-4) var(--space-4) var(--space-8); transform: translateX(100%); visibility: hidden; transition: transform .2s ease, visibility 0s linear .2s; }
+    .nav.is-open { transform: none; visibility: visible; transition-delay: 0s; }
     .nav__list { flex-direction: column; align-items: stretch; gap: 0; }
     .nav__item { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid var(--c-line); }
     .nav__link { padding: 1rem 0.5rem; font-size: var(--fs-lg); }

@@ -110,7 +110,7 @@ const nearby = c.nearby.map((slug) => city(slug)).map((n) => ({ name: `Dakwerker
         </ul>
         <a class="btn btn--ink" href={`tel:${site.phoneE164}`}><Icon name="phone" /> Bel {site.phoneDisplay}</a>
       </div>
-      <ContactForm compact heading={`Vraag uw gratis offerte aan voor ${c.city}`} />
+      <ContactForm compact heading={`Vraag uw gratis offerte aan voor ${c.city}`} headingLevel={3} />
     </div>
   </section>
 </Base>

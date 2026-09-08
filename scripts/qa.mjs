@@ -22,6 +22,7 @@ walk(DIST);
 const titles = new Map();
 const descs = new Map();
 const emojiRe = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F900}-\u{1F9FF}]/u;
+const noindexPage = (html) => /name="robots" content="noindex/.test(html);
 const bodyText = (html) => html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
 
 for (const p of pages) {
@@ -51,7 +52,8 @@ for (const p of pages) {
   if (descs.has(desc)) problems.push(`${rel}: duplicate meta description with ${descs.get(desc)}`);
   descs.set(desc, rel);
 
-  if (!html.includes('rel="canonical"')) problems.push(`${rel}: missing canonical`);
+  if (!noindexPage(html) && !html.includes('rel="canonical"')) problems.push(`${rel}: missing canonical`);
+  if (html.includes('data-endpoint=""')) warnings.push(`${rel}: LEAD FORM NOT WIRED (set formEndpoint or ghlFormEmbedUrl in src/config/site.ts before launch)`);
   if (!html.includes('application/ld+json')) problems.push(`${rel}: missing JSON-LD`);
 
   // images without alt attribute

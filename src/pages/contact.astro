@@ -64,7 +64,9 @@ const faq = [
     iframe.style.border = '0';
     iframe.loading = 'lazy';
     iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.tabIndex = -1;
     map.replaceChildren(iframe);
+    iframe.focus();
   });
 </script>
 
