@@ -189,3 +189,29 @@ th { font-weight: 700; color: var(--c-ink); background: var(--c-cream); }
 .text-center { text-align: center; }
 .muted { color: var(--c-muted); }
 .small { font-size: var(--fs-sm); }
+
+/* ==========================================================================
+   Phones and small tablets: single-column layout, everything centered.
+   Forms, tables and the privacy document keep left alignment for readability.
+   ========================================================================== */
+@media (max-width: 859px) {
+  .split > *, .prose, .card, .steps__item, .why__item, .service-card__body, .city-service, .related__card,
+  .area-card, .city-card, .local-card, .footer__brand, .footer nav, .lead__head, .trust__item, .map__placeholder,
+  .photo-grid__item figcaption, .faq__a, .contact-cards li, .contact-list li, .footer__contact li, .checklist li { text-align: center; }
+  .prose ul, .prose ol { list-style-position: inside; padding-left: 0; }
+  .btn-row, .section-actions, .footer__social, .towns, .brands, .hero__usps, .checklist li, .crumbs ol,
+  .contact-cards li, .contact-list li, .footer__contact li, .steps__list { justify-content: center; }
+  .checklist li, .contact-cards li, .contact-list li, .footer__contact li { flex-direction: column; align-items: center; gap: 0.35rem; }
+  .checklist li svg, .contact-cards svg, .contact-list svg, .footer__contact svg { margin-top: 0; }
+  .icon-badge, .steps__num, .why__item svg, .area-card svg, .city-card > svg, .related__card svg { margin-inline: auto; }
+  .related__card { padding-right: var(--space-5); }
+  .related__card svg { position: static; transform: none; margin-top: 0.5rem; }
+  .faq__q span { flex: 1; text-align: center; }
+  .footer__grid { justify-items: center; text-align: center; }
+  .footer__bottom-inner { justify-content: center; text-align: center; }
+  .section-actions { margin-inline: auto; }
+  .lead__form .field, .lead__form .field label, .lead__form .field__error { text-align: left; }
+  .table-wrap, table { text-align: left; }
+  .prose--doc, .prose--doc ul, .prose--doc ol { text-align: left; list-style-position: outside; padding-left: 1.25rem; }
+  .prose--doc ul, .prose--doc ol { padding-left: 1.25rem; }
+}
