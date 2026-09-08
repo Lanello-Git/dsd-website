@@ -204,6 +204,8 @@ th { font-weight: 700; color: var(--c-ink); background: var(--c-cream); }
   .checklist li, .contact-cards li, .contact-list li, .footer__contact li { flex-direction: column; align-items: center; gap: 0.35rem; }
   .checklist li svg, .contact-cards svg, .contact-list svg, .footer__contact svg { margin-top: 0; }
   .icon-badge, .steps__num, .why__item svg, .area-card svg, .city-card > svg, .related__card svg { margin-inline: auto; }
+  .service-card__body, .city-service, .city-card { align-items: center; }
+  .area-card, .related__card { justify-items: center; }
   .related__card { padding-right: var(--space-5); }
   .related__card svg { position: static; transform: none; margin-top: 0.5rem; }
   .faq__q span { flex: 1; text-align: center; }
