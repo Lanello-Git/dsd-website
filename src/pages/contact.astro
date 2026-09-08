@@ -26,14 +26,15 @@ const faq = [
         <h1>Contacteer DSD Dakwerken voor een gratis offerte</h1>
         <p class="lead">Bel, sms, mail of vul het formulier in. Peter komt gratis en vrijblijvend langs in Aalter en heel het Meetjesland, en u krijgt een duidelijke offerte met vaste prijzen.</p>
       </div>
-      <div class="split" style="align-items:start">
-        <div>
-          <ul class="contact-cards">
-            <li class="card card--flat"><Icon name="phone" /><div><strong>Bel of sms</strong><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a><span class="muted small">Ook voor dringende herstellingen</span></div></li>
-            <li class="card card--flat"><Icon name="mail" /><div><strong>E-mail</strong><a href={`mailto:${site.email}`}>{site.email}</a><span class="muted small">Stuur gerust foto's mee</span></div></li>
-            <li class="card card--flat"><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}<br />{site.address.postalCode} {site.address.city}</span><span class="muted small">Gevestigd in {site.address.subMunicipality}, bezoek enkel op afspraak</span></div></li>
-            <li class="card card--flat"><Icon name="clock" /><div><strong>Bereikbaar</strong>{site.hours.map((h) => <span>{h.days}: {h.open} - {h.close}</span>)}</div></li>
-          </ul>
+      <ul class="contact-cards">
+        <li class="card card--flat"><Icon name="phone" /><div><strong>Bel of sms</strong><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a><span class="muted small">Ook voor dringende herstellingen</span></div></li>
+        <li class="card card--flat"><Icon name="mail" /><div><strong>E-mail</strong><a href={`mailto:${site.email}`}>{site.email}</a><span class="muted small">Stuur gerust foto's mee</span></div></li>
+        <li class="card card--flat"><Icon name="map-pin" /><div><strong>Adres</strong><span>{site.address.street}<br />{site.address.postalCode} {site.address.city}</span><span class="muted small">Gevestigd in {site.address.subMunicipality}, bezoek enkel op afspraak</span></div></li>
+        <li class="card card--flat"><Icon name="clock" /><div><strong>Bereikbaar</strong>{site.hours.map((h) => <span>{h.days}: {h.open} - {h.close}</span>)}</div></li>
+      </ul>
+      <div class="contact-split">
+        <ContactForm />
+        <div class="map-col">
           <div class="map" id="map" data-src={`https://www.google.com/maps?q=${mapQuery}&output=embed&hl=nl`}>
             <div class="map__placeholder">
               <Icon name="map-pin" size={32} />
@@ -42,9 +43,8 @@ const faq = [
               <a class="small" href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener">Open in Google Maps</a>
             </div>
           </div>
-          <p class="small muted" style="margin-top:1rem">BTW {site.vat}. {site.legalName}, {site.address.street}, {site.address.postalCode} {site.address.city}.</p>
+          <p class="small muted text-center map-col__legal">BTW {site.vat}. {site.legalName}, {site.address.street}, {site.address.postalCode} {site.address.city}.</p>
         </div>
-        <ContactForm />
       </div>
     </div>
   </section>
@@ -60,7 +60,8 @@ const faq = [
     iframe.title = 'Kaart met de ligging van DSD Dakwerken in Aalter';
     iframe.src = map.dataset.src ?? '';
     iframe.width = '100%';
-    iframe.height = '320';
+    iframe.style.height = '100%';
+    iframe.style.minHeight = '420px';
     iframe.style.border = '0';
     iframe.loading = 'lazy';
     iframe.referrerPolicy = 'no-referrer-when-downgrade';
@@ -71,13 +72,17 @@ const faq = [
 </script>
 
 <style>
-  .map__placeholder { display: grid; justify-items: center; gap: 0.75rem; text-align: center; padding: var(--space-6) var(--space-4); background: var(--c-cream); min-height: 320px; align-content: center; }
+  .contact-cards { list-style: none; padding: 0; margin: 0 0 var(--space-6); display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .contact-cards li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.6rem; margin: 0; }
+  .contact-cards svg { color: var(--c-gold-deep); flex: none; }
+  .contact-cards strong, .contact-cards a, .contact-cards span { display: block; }
+  .contact-cards a { font-weight: 700; font-size: var(--fs-lg); text-decoration: none; overflow-wrap: anywhere; }
+  .contact-split { display: grid; gap: var(--space-6); align-items: stretch; }
+  @media (min-width: 900px) { .contact-split { grid-template-columns: 1.15fr 1fr; } }
+  .map-col { display: flex; flex-direction: column; gap: var(--space-3); }
+  .map { flex: 1; display: flex; min-height: 420px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--c-line); }
+  .map__placeholder { flex: 1; display: grid; justify-items: center; align-content: center; gap: 0.75rem; text-align: center; padding: var(--space-6) var(--space-4); background: var(--c-cream); }
   .map__placeholder svg { color: var(--c-gold-deep); }
   .map__placeholder p { margin: 0; }
-  .contact-cards { list-style: none; padding: 0; margin: 0 0 var(--space-5); display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
-  .contact-cards li { display: flex; gap: 0.8rem; align-items: flex-start; margin: 0; }
-  .contact-cards svg { color: var(--c-gold-deep); flex: none; margin-top: 0.2rem; }
-  .contact-cards strong, .contact-cards a, .contact-cards span { display: block; }
-  .contact-cards a { font-weight: 700; font-size: var(--fs-lg); text-decoration: none; }
-  .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--c-line); }
+  .map-col__legal { margin: 0; }
 </style>
