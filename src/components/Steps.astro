@@ -8,6 +8,8 @@ const defaults: Step[] = [
   { title: 'Uitvoering en oplevering', text: 'Onze eigen ploeg voert de werken uit, op de afgesproken datum en netjes afgewerkt.' },
 ];
 const { heading = 'Zo werken wij', intro = 'Van eerste contact tot oplevering: Ã©Ã©n aanspreekpunt en een duidelijke planning.', steps = defaults, eyebrow = 'Werkwijze' } = Astro.props;
+// Even rows: 3 columns for 3, 5, 6 or 9 steps, 4 columns for 4, 7 or 8 steps.
+const cols = steps.length % 3 === 0 || steps.length === 5 ? 3 : 4;
 ---
 <section class="section section--cream steps" aria-labelledby="steps-title">
   <div class="container">
@@ -16,7 +18,7 @@ const { heading = 'Zo werken wij', intro = 'Van eerste contact tot oplevering: Ã
       <h2 id="steps-title">{heading}</h2>
       {intro && <p class="lead">{intro}</p>}
     </div>
-    <ol class="steps__list">
+    <ol class="steps__list" style={`--cols:${cols}`}>
       {steps.map((s, i) => (
         <li class="steps__item">
           <span class="steps__num">{i + 1}</span>
@@ -29,7 +31,9 @@ const { heading = 'Zo werken wij', intro = 'Van eerste contact tot oplevering: Ã
 </section>
 
 <style>
-  .steps__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); counter-reset: step; }
+  .steps__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-5); grid-template-columns: 1fr; counter-reset: step; }
+  @media (min-width: 600px) { .steps__list { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .steps__list { grid-template-columns: repeat(var(--cols, 4), 1fr); } }
   .steps__item { background: var(--c-white); border-radius: var(--radius); padding: var(--space-5); border: 1px solid var(--c-line); margin: 0; }
   .steps__num { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--c-ink); color: var(--c-gold); font-family: var(--font-display); font-size: var(--fs-lg); margin-bottom: var(--space-4); }
   .steps__item h3 { font-size: var(--fs-lg); margin-bottom: var(--space-2); }
