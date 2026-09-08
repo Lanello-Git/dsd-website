@@ -14,7 +14,7 @@ interface Props {
 }
 const {
   heading = 'Vraag uw gratis offerte aan',
-  intro = 'Vul het formulier in en wij bellen u binnen één werkdag terug voor een gratis en vrijblijvend plaatsbezoek.',
+  intro = 'Vul het formulier in en wij bellen u zo snel mogelijk terug voor een gratis en vrijblijvend plaatsbezoek.',
   compact = false,
   preselect,
   headingLevel = 2,
@@ -55,7 +55,7 @@ const Heading = headingLevel === 3 ? 'h3' : 'h2';
           <p class="field__error" id="err-gemeente" role="alert"></p>
         </div>
         <div class="field field--full">
-          <label for="dienst">Waarvoor kunnen wij u helpen?</label>
+          <label for="dienst">Waarmee kunnen wij u helpen?</label>
           <select id="dienst" name="dienst">
             <option value="">Maak een keuze</option>
             {services.map((s) => <option value={s.name} selected={preselect === s.slug}>{s.name}</option>)}
@@ -68,7 +68,7 @@ const Heading = headingLevel === 3 ? 'h3' : 'h2';
         </div>
         <div class="field field--full field--check">
           <input id="akkoord" name="akkoord" type="checkbox" required aria-describedby="err-akkoord" data-error="Vink aan dat wij u mogen contacteren." />
-          <label for="akkoord">Ik ga akkoord dat DSD Dakwerken mijn gegevens gebruikt om mij te contacteren over mijn aanvraag. <a href="/privacybeleid/">Privacybeleid</a> <span aria-hidden="true">*</span></label>
+          <label for="akkoord">Ik ga ermee akkoord dat DSD Dakwerken mijn gegevens gebruikt om mij te contacteren over mijn aanvraag. <a href="/privacybeleid/">Privacybeleid</a> <span aria-hidden="true">*</span></label>
           <p class="field__error field__error--full" id="err-akkoord" role="alert"></p>
         </div>
         <div class="hp" aria-hidden="true">

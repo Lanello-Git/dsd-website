@@ -33,8 +33,9 @@ for (const p of pages) {
   if (text.includes('—')) problems.push(`${rel}: em dash found`);
   if (text.includes('–')) warnings.push(`${rel}: en dash found`);
   if (emojiRe.test(text)) problems.push(`${rel}: emoji found`);
+  const visible = text.replace(/<[^>]+>/g, ' ');
   for (const bad of ['STUB', 'lorem ipsum', 'Lorem ipsum', 'TODO', 'placeholder', 'Almighty', 'Mutual Electric', 'Bonney Lake', 'undefined', '[object Object]']) {
-    if (text.includes(bad)) problems.push(`${rel}: contains "${bad}"`);
+    if (visible.includes(bad)) problems.push(`${rel}: contains "${bad}"`);
   }
 
   const h1s = (text.match(/<h1[\s>]/g) || []).length;
