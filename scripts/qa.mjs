@@ -54,7 +54,7 @@ for (const p of pages) {
   descs.set(desc, rel);
 
   if (!noindexPage(html) && !html.includes('rel="canonical"')) problems.push(`${rel}: missing canonical`);
-  if (html.includes('data-endpoint=""')) warnings.push(`${rel}: LEAD FORM NOT WIRED (set formEndpoint or ghlFormEmbedUrl in src/config/site.ts before launch)`);
+  if (/data-endpoint(=""|\s|>)/.test(html)) warnings.push(`${rel}: LEAD FORM NOT WIRED (set formEndpoint or ghlFormEmbedUrl in src/config/site.ts before launch)`);
   if (!html.includes('application/ld+json')) problems.push(`${rel}: missing JSON-LD`);
 
   // images without alt attribute
