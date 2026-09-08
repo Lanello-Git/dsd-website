@@ -40,11 +40,14 @@ export const site = {
   reviewsUrl: 'https://www.google.com/search?q=DSD+Dakwerken+Aalter+reviews',
   /**
    * Lead capture. Lanello routes leads through GoHighLevel (GHL).
-   * - Set ghlFormEmbedUrl to the GHL form URL to render the GHL iframe instead of the native form.
-   * - Or set formEndpoint to a GHL inbound webhook (or any POST endpoint) for the native form.
-   * TODO: fill one of these before launch. The native form refuses to submit while both are empty.
+   * - ghlFormEmbedUrl set: every form on the site renders the GHL iframe (with the GHL resize script).
+   * - Otherwise the native form posts JSON to formEndpoint (a GHL inbound webhook).
    */
-  ghlFormEmbedUrl: '',
+  ghlFormEmbedUrl: 'https://links.desmetenzoon.be/widget/form/AIDxCNUQKl5KhAKQLBfb',
+  ghlFormId: 'AIDxCNUQKl5KhAKQLBfb',
+  ghlFormName: 'Website form - With email',
+  ghlFormHeight: 642,
+  ghlEmbedScript: 'https://links.desmetenzoon.be/js/form_embed.js',
   formEndpoint: '',
   guarantee: '10 jaar garantie op waterdichtheid',
   usps: [

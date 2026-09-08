@@ -30,7 +30,30 @@ const Heading = headingLevel === 3 ? 'h3' : 'h2';
   </div>
 
   {embed ? (
-    <iframe src={embed} title="Offerteformulier DSD Dakwerken" class="lead__embed" loading="lazy"></iframe>
+    <div class="lead__embed-wrap">
+      <iframe
+        src={embed}
+        class="lead__embed"
+        style={`width:100%;height:${site.ghlFormHeight}px;border:none;border-radius:3px`}
+        id={`inline-${site.ghlFormId}`}
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name={site.ghlFormName}
+        data-height={String(site.ghlFormHeight)}
+        data-layout-iframe-id={`inline-${site.ghlFormId}`}
+        data-form-id={site.ghlFormId}
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
+        title={site.ghlFormName}
+      ></iframe>
+      <script is:inline src={site.ghlEmbedScript}></script>
+      <p class="lead__alt">Liever bellen? <a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a> of mail naar <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
   ) : (
     <form class="lead__form" method="post" action={endpoint || undefined} data-endpoint={endpoint} novalidate>
       <div class="field-grid">
@@ -161,7 +184,8 @@ const Heading = headingLevel === 3 ? 'h3' : 'h2';
   .lead--compact { padding: var(--space-5); }
   .lead__title { font-size: var(--fs-xl); margin-bottom: var(--space-2); font-family: var(--font-display); font-weight: 400; }
   .lead__intro { color: var(--c-muted); margin-bottom: var(--space-5); }
-  .lead__embed { width: 100%; min-height: 640px; border: 0; }
+  .lead__embed { width: 100%; border: 0; display: block; }
+  .lead__embed-wrap { margin-inline: -0.25rem; }
   .field-grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
   @media (min-width: 560px) { .field-grid { grid-template-columns: 1fr 1fr; } }
   .field { display: grid; gap: 0.35rem; align-content: start; }
