@@ -197,12 +197,15 @@ th { font-weight: 700; color: var(--c-ink); background: var(--c-cream); }
 @media (max-width: 859px) {
   .split > *, .prose, .card, .steps__item, .why__item, .service-card__body, .city-service, .related__card,
   .area-card, .city-card, .local-card, .footer__brand, .footer nav, .lead__head, .trust__item, .map__placeholder,
-  .photo-grid__item figcaption, .faq__a, .contact-cards li, .contact-list li, .footer__contact li, .checklist li { text-align: center; }
-  .prose ul, .prose ol { list-style-position: inside; padding-left: 0; }
-  .btn-row, .section-actions, .footer__social, .towns, .brands, .hero__usps, .checklist li, .crumbs ol,
-  .contact-cards li, .contact-list li, .footer__contact li, .steps__list { justify-content: center; }
-  .checklist li, .contact-cards li, .contact-list li, .footer__contact li { flex-direction: column; align-items: center; gap: 0.35rem; }
-  .checklist li svg, .contact-cards svg, .contact-list svg, .footer__contact svg { margin-top: 0; }
+  .photo-grid__item figcaption, .faq__a, .contact-cards li, .footer__contact li { text-align: center; }
+  .prose ul, .prose ol { text-align: left; max-width: 34rem; margin-inline: auto; }
+  .btn-row, .section-actions, .footer__social, .towns, .brands, .hero__usps, .crumbs ol,
+  .contact-cards li, .footer__contact li, .steps__list { justify-content: center; }
+  .contact-cards li, .footer__contact li { flex-direction: column; align-items: center; gap: 0.35rem; }
+  .contact-cards svg, .footer__contact svg { margin-top: 0; }
+  /* Exception: icon checklists and the contact list stay left-aligned rows, centered as a block. */
+  .checklist, .contact-list { max-width: 34rem; margin-inline: auto; text-align: left; }
+  .checklist li, .contact-list li { flex-direction: row; justify-content: flex-start; align-items: flex-start; text-align: left; }
   .icon-badge, .steps__num, .why__item svg, .area-card svg, .city-card > svg, .related__card svg { margin-inline: auto; }
   .service-card__body, .city-service, .city-card { align-items: center; }
   .area-card, .related__card { justify-items: center; }
