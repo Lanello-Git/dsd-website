@@ -115,8 +115,11 @@ strong { font-weight: 700; }
 .section--ink .eyebrow { color: var(--c-gold); }
 .lead { font-size: var(--fs-lg); color: var(--c-muted); max-width: 46rem; }
 .section--ink .lead { color: #cfc8ba; }
-.section-head { max-width: 46rem; margin-bottom: var(--space-6); }
+.section-head { max-width: 46rem; margin: 0 auto var(--space-6); text-align: center; }
+.section-head .lead { margin-inline: auto; }
 .section-head--center { margin-inline: auto; text-align: center; }
+.section-head--left { margin-inline: 0; text-align: left; }
+.section-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
 .prose { max-width: 46rem; }
 .prose h2 { margin-top: var(--space-6); }
 .prose h3 { margin-top: var(--space-5); }

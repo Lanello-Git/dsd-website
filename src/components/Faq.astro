@@ -23,7 +23,7 @@ const { items, heading = 'Veelgestelde vragen', intro, id = 'faq' } = Astro.prop
 </section>
 
 <style>
-  .faq__list { max-width: 50rem; display: grid; gap: var(--space-3); }
+  .faq__list { max-width: 50rem; margin-inline: auto; display: grid; gap: var(--space-3); }
   .faq__item { border: 1px solid var(--c-line); border-radius: var(--radius); background: var(--c-white); }
   .faq__item[open] { border-color: var(--c-gold); }
   .faq__q { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); cursor: pointer; list-style: none; padding: 1rem 1.25rem; font-family: var(--font-body); font-weight: 700; font-size: var(--fs-md); color: var(--c-ink); }

@@ -68,15 +68,17 @@ const groups = [
           <p class="lead">{g.text}</p>
         </div>
         <PhotoGrid items={g.items} />
-        <p style="margin-top:1.5rem"><a class="btn btn--outline" href={g.href}>{g.link} <Icon name="arrow-right" /></a></p>
+        <div class="section-actions"><a class="btn btn--outline" href={g.href}>{g.link} <Icon name="arrow-right" /></a></div>
       </div>
     </section>
   ))}
 
   <section class="section" aria-labelledby="deurle-title">
-    <div class="container prose">
-      <span class="eyebrow">Uitgelicht project</span>
-      <h2 id="deurle-title" class="mt-0">Volledige dakrenovatie in Deurle (Sint-Martens-Latem)</h2>
+    <div class="container prose" style="margin-inline:auto">
+      <div class="section-head">
+        <span class="eyebrow">Uitgelicht project</span>
+        <h2 id="deurle-title" class="mt-0">Volledige dakrenovatie in Deurle (Sint-Martens-Latem)</h2>
+      </div>
       <p>In Deurle vernieuwden wij het volledige dak van een woning. De oude Koramic Vlaamse pannen waren versleten en het dak was onvoldoende geïsoleerd. Wij verwijderden de oude bedekking, plaatsten een nieuw onderdak en nieuwe isolatie en dekten het dak opnieuw met Terreal Prieuré pannen, een kleidakpan die past bij het karakter van de woningen in de Leiestreek.</p>
       <p>Alle dakmaterialen werden geleverd door APOK, een leverancier waarmee wij al jaren samenwerken. Het resultaat is een dak dat weer tientallen jaren meegaat, een lagere energiefactuur voor de bewoners en een woning die er opnieuw uitziet zoals het hoort. Meer weten over deze aanpak? Lees onze pagina over <a href="/dakrenovatie/">dakrenovatie</a> of over <a href="/werkgebied/dakwerker-gent/">dakwerken in de regio Gent</a>.</p>
     </div>

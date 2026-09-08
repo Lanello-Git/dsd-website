@@ -6,7 +6,7 @@ const { heading = 'Klaar om uw dak of woning aan te pakken?', text = 'Bel ons of
 ---
 <section class="section section--ink cta">
   <div class="container cta__inner">
-    <div>
+    <div class="section-head">
       <span class="eyebrow">Gratis en vrijblijvend</span>
       <h2>{heading}</h2>
       <p class="lead">{text}</p>
@@ -19,6 +19,7 @@ const { heading = 'Klaar om uw dak of woning aan te pakken?', text = 'Bel ons of
 </section>
 
 <style>
-  .cta__inner { display: grid; gap: var(--space-6); align-items: center; }
-  @media (min-width: 900px) { .cta__inner { grid-template-columns: 1.4fr 1fr; } .cta__buttons { justify-content: flex-end; } }
+  .cta__inner { display: grid; gap: var(--space-5); justify-items: center; text-align: center; }
+  .cta__inner .section-head { margin-bottom: 0; }
+  .cta__buttons { justify-content: center; }
 </style>

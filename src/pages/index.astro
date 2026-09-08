@@ -83,7 +83,7 @@ const projects = [
         <p class="lead" style="margin-inline:auto">Echte daken en gevels van klanten in het Meetjesland, geen stockfoto's. Van een volledige <a href="/dakrenovatie/">dakrenovatie</a> tot een uitbouw met <a href="/gevelbekleding/">houten gevelbekleding</a>.</p>
       </div>
       <PhotoGrid items={projects} />
-      <p class="text-center" style="margin-top:2rem"><a class="btn btn--ink" href="/realisaties/">Bekijk alle realisaties <Icon name="arrow-right" /></a></p>
+      <div class="section-actions"><a class="btn btn--ink" href="/realisaties/">Bekijk alle realisaties <Icon name="arrow-right" /></a></div>
     </div>
   </section>
 
@@ -155,7 +155,7 @@ const projects = [
   .area-card { display: grid; gap: 0.25rem; text-decoration: none; color: var(--c-ink); }
   .area-card:hover { border-color: var(--c-gold); color: var(--c-ink); }
   .area-card svg { color: var(--c-gold-deep); margin-bottom: 0.25rem; }
-  .towns-line { margin-top: var(--space-5); max-width: 60rem; }
+  .towns-line { margin: var(--space-5) auto 0; max-width: 60rem; text-align: center; }
   .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); }
   .contact-list li { display: flex; gap: 0.9rem; align-items: flex-start; margin: 0; }
   .contact-list svg { color: var(--c-gold-deep); flex: none; margin-top: 0.15rem; }

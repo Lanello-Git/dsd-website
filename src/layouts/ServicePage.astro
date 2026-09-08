@@ -117,7 +117,7 @@ const secondPhoto = c.gallery?.[0]?.image ?? c.image;
           <h2 id="gallery-title">Recente projecten: {c.navLabel.toLowerCase()} door DSD Dakwerken</h2>
         </div>
         <PhotoGrid items={c.gallery} />
-        <p style="margin-top:1.5rem"><a class="btn btn--ink" href="/realisaties/">Bekijk alle realisaties <Icon name="arrow-right" /></a></p>
+        <div class="section-actions"><a class="btn btn--ink" href="/realisaties/">Bekijk alle realisaties <Icon name="arrow-right" /></a></div>
       </div>
     </section>
   )}
@@ -145,7 +145,7 @@ const secondPhoto = c.gallery?.[0]?.image ?? c.image;
 </Base>
 
 <style>
-  .included { display: grid; gap: 0.75rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); max-width: 60rem; }
+  .included { display: grid; gap: 0.75rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); max-width: 60rem; margin-inline: auto; }
   .why__item svg { color: var(--c-gold); margin-bottom: var(--space-3); }
   .why__item h3 { font-size: var(--fs-lg); color: var(--c-white); margin-bottom: var(--space-2); }
   .why__item p { color: #cfc8ba; margin: 0; }
