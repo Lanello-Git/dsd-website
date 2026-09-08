@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Hero from '../../components/Hero.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import Icon from '../../components/Icon.astro';
+import { cities, cityHref, servedTowns } from '../../data/cities';
+import { services, serviceHref } from '../../data/services';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+const crumbs = [{ name: 'Werkgebied', href: '/werkgebied/' }];
+const ov = servedTowns.filter((t) => t.province === 'Oost-Vlaanderen');
+const wv = servedTowns.filter((t) => t.province === 'West-Vlaanderen');
+const faq = [
+  { q: 'Tot waar komen jullie werken?', a: 'Wij werken in een straal van ongeveer 30 km rond Knesselare (Aalter). Dat is het Meetjesland, de regio Gent en Deinze in Oost-Vlaanderen en de regio Brugge, Beernem, Oostkamp en Tielt in West-Vlaanderen. Ligt uw gemeente net buiten die straal? Bel ons gerust, voor grotere werken komen wij verder.' },
+  { q: 'Rekenen jullie verplaatsingskosten aan?', a: 'Voor het plaatsbezoek en de offerte niet: die zijn altijd gratis, waar u ook woont in ons werkgebied. Bij de uitvoering zit de verplaatsing in de offerteprijs verrekend, zodat u vooraf weet wat u betaalt.' },
+  { q: 'Hebben jullie ook een pagina voor mijn gemeente?', a: 'Alleen voor de grootste steden in ons werkgebied schreven wij een aparte pagina: Gent, Brugge, Eeklo, Deinze en Maldegem. Woont u in een andere gemeente uit de lijst hierboven, zoals Beernem, Lievegem, Tielt of Zomergem, dan gelden dezelfde diensten, dezelfde prijzen en dezelfde garantie. Bel ons of vul het formulier in en vermeld uw gemeente.' },
+  { q: 'Werken jullie ook in Knesselare, Bellem, Lotenhulle en Ursel?', a: 'Ja, dat zijn de deelgemeenten van Aalter en dus onze eigen streek. Ons bedrijf ligt in Knesselare, aan de Geuzestraat. Voor de deelgemeenten van Aalter zijn wij het snelst ter plaatse, ook voor een kleine herstelling of een dakinspectie.' },
+  { q: 'Doen jullie in de stad ook daken van rijwoningen en appartementen?', a: 'Ja. In Gent en Brugge werken wij vaak aan rijwoningen met een steil pannendak of leien en een plat dak op de achterbouw, en aan kleine appartementsgebouwen. Als er een stelling of verreiker op het voetpad moet staan, vragen wij de nodige vergunning voor inname van het openbaar domein zelf aan bij de stad.' },
+  { q: 'Komen jullie ook voor een dringende herstelling ver van Aalter?', a: 'Ja. Bij een lek of stormschade proberen wij zo snel mogelijk langs te komen, ook in Gent of Brugge. Bel ons op 0460 23 15 34 en beschrijf kort het probleem, dan plannen wij u meteen in.' },
+];
+---
+<Base title="Dakwerker Meetjesland, Gent en Brugge | DSD Dakwerken" description="DSD Dakwerken werkt in een straal van 30 km rond Aalter: Gent, Brugge, Eeklo, Deinze, Maldegem en Tielt. Bekijk uw gemeente en vraag een gratis offerte aan." path="/werkgebied/" schema={[breadcrumbSchema(crumbs), faqSchema(faq)]}>
+  <Breadcrumbs items={crumbs} />
+  <Hero eyebrow="Werkgebied" h1="Uw dakwerker in het Meetjesland, van Gent tot Brugge" intro="DSD Dakwerken werkt vanuit Knesselare (Aalter) in een straal van ongeveer 30 km. Dicht genoeg om snel ter plaatse te zijn, ook voor een dringende herstelling." image="renovatie-woning-bestelwagens-dsd" imageAlt="Bestelwagens van DSD Dakwerken voor een woning in renovatie in het Meetjesland" />
+  <TrustBar />
+
+  <section class="section" aria-labelledby="cities-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Steden met een eigen pagina</span>
+        <h2 id="cities-title">Dakwerken in uw stad of gemeente</h2>
+        <p class="lead">Voor onze belangrijkste steden schreven wij een pagina met lokale informatie: het type woningen, de veelvoorkomende dakproblemen en wat u mag verwachten.</p>
+      </div>
+      <div class="grid grid--3">
+        <a class="card city-card" href="/">
+          <Icon name="home" />
+          <h3>Aalter en Knesselare</h3>
+          <p>Onze thuisbasis. Ook Bellem, Lotenhulle, Poeke, Ursel en Sint-Maria-Aalter.</p>
+          <span class="city-card__link">Naar de startpagina <Icon name="arrow-right" size={18} /></span>
+        </a>
+        {cities.map((c) => (
+          <a class="card city-card" href={cityHref(c.slug)}>
+            <Icon name="map-pin" />
+            <h3>Dakwerker {c.city}</h3>
+            <p>{c.distanceKm} km van Aalter. Ook {c.neighbourhoods.items.slice(0, 4).join(', ')}.</p>
+            <span class="city-card__link">Dakwerken in {c.city} <Icon name="arrow-right" size={18} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" aria-labelledby="towns-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Alle gemeenten</span>
+        <h2 id="towns-title">Gemeenten waar wij regelmatig werken</h2>
+        <p class="lead">Staat uw gemeente er niet bij? Bel ons even, voor de meeste werken komen wij ook net buiten deze lijst.</p>
+      </div>
+      <div class="split" style="align-items:start">
+        <div>
+          <h3>Oost-Vlaanderen</h3>
+          <ul class="towns">{ov.map((t) => <li>{t.page ? <a href={cityHref(t.page)}>{t.name}</a> : t.name}</li>)}</ul>
+        </div>
+        <div>
+          <h3>West-Vlaanderen</h3>
+          <ul class="towns">{wv.map((t) => <li>{t.page ? <a href={cityHref(t.page)}>{t.name}</a> : t.name}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="svc-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Diensten</span>
+        <h2 id="svc-title">Wat wij in heel het werkgebied doen</h2>
+      </div>
+      <ul class="svc-list">
+        {services.map((s) => <li><a href={serviceHref(s.slug)}><Icon name="chevron-right" size={16} /> {s.name}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} heading="Veelgestelde vragen over ons werkgebied" />
+  <Cta heading="Woont u in ons werkgebied? Vraag een gratis offerte aan" />
+</Base>
+
+<style>
+  .city-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+  .city-card:hover { border-color: var(--c-gold); color: inherit; }
+  .city-card > svg { color: var(--c-gold-deep); margin-bottom: var(--space-3); }
+  .city-card h3 { font-size: var(--fs-lg); margin-bottom: var(--space-2); }
+  .city-card p { color: var(--c-muted); flex: 1; }
+  .city-card__link { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; color: var(--c-gold-deep); margin-top: var(--space-3); }
+  .towns { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .towns li { margin: 0; background: var(--c-white); border: 1px solid var(--c-line); border-radius: 999px; padding: 0.3rem 0.8rem; font-size: var(--fs-sm); }
+  .towns a { text-decoration: none; font-weight: 700; }
+  .svc-list { list-style: none; padding: 0; margin: 0 auto; max-width: 60rem; display: grid; gap: 0.5rem 1.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .svc-list a { display: inline-flex; align-items: center; gap: 0.3rem; text-decoration: none; font-weight: 600; color: var(--c-ink); }
+  .svc-list a:hover { color: var(--c-gold-deep); }
+</style>

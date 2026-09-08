@@ -1,0 +1,10 @@
+---
+import CityPage from '../../layouts/CityPage.astro';
+import { cities } from '../../data/cities';
+
+export function getStaticPaths() {
+  return cities.map((c) => ({ params: { city: c.slug }, props: { content: c } }));
+}
+const { content } = Astro.props;
+---
+<CityPage content={content} />

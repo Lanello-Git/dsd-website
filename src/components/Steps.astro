@@ -1,0 +1,37 @@
+---
+import type { Step } from '../data/types';
+interface Props { heading?: string; intro?: string; steps?: Step[]; eyebrow?: string }
+const defaults: Step[] = [
+  { title: 'U neemt contact op', text: 'Bel, sms of vul het formulier in. Wij nemen snel contact met u op.' },
+  { title: 'Gratis plaatsbezoek', text: 'Peter komt langs, bekijkt uw dak of woning en luistert naar wat u wilt.' },
+  { title: 'Duidelijke offerte', text: 'U krijgt een gedetailleerde offerte met vaste prijzen. Geen verrassingen achteraf.' },
+  { title: 'Uitvoering en oplevering', text: 'Onze eigen ploeg voert de werken uit, op de afgesproken datum en netjes afgewerkt.' },
+];
+const { heading = 'Zo werken wij', intro = 'Van eerste contact tot oplevering: één aanspreekpunt en een duidelijke planning.', steps = defaults, eyebrow = 'Werkwijze' } = Astro.props;
+---
+<section class="section section--cream steps" aria-labelledby="steps-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 id="steps-title">{heading}</h2>
+      {intro && <p class="lead">{intro}</p>}
+    </div>
+    <ol class="steps__list">
+      {steps.map((s, i) => (
+        <li class="steps__item">
+          <span class="steps__num">{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); counter-reset: step; }
+  .steps__item { background: var(--c-white); border-radius: var(--radius); padding: var(--space-5); border: 1px solid var(--c-line); margin: 0; }
+  .steps__num { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--c-ink); color: var(--c-gold); font-family: var(--font-display); font-size: var(--fs-lg); margin-bottom: var(--space-4); }
+  .steps__item h3 { font-size: var(--fs-lg); margin-bottom: var(--space-2); }
+  .steps__item p { color: var(--c-muted); margin: 0; }
+</style>

@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+interface Props { heading?: string; text?: string; }
+const { heading = 'Klaar om uw dak of woning aan te pakken?', text = 'Bel ons of vraag online een gratis offerte aan. Wij komen ter plaatse kijken, meten alles op en bezorgen u een duidelijke prijs zonder verrassingen.' } = Astro.props;
+---
+<section class="section section--ink cta">
+  <div class="container cta__inner">
+    <div class="section-head">
+      <span class="eyebrow">Gratis en vrijblijvend</span>
+      <h2>{heading}</h2>
+      <p class="lead">{text}</p>
+    </div>
+    <div class="btn-row cta__buttons">
+      <a class="btn btn--gold btn--lg" href="/contact/">Vraag een gratis offerte <Icon name="arrow-right" /></a>
+      <a class="btn btn--outline-light btn--lg" href={`tel:${site.phoneE164}`}><Icon name="phone" /> Bel {site.phoneDisplay}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta__inner { display: grid; gap: var(--space-5); justify-items: center; text-align: center; }
+  .cta__inner .section-head { margin-bottom: 0; }
+  .cta__buttons { justify-content: center; }
+</style>

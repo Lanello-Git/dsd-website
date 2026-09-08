@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import { photo, alt as altOf } from '../data/photos';
+interface Props { items: { image: string; alt?: string; caption?: string }[]; columns?: 2 | 3 | 4 }
+const { items, columns = 3 } = Astro.props;
+---
+<div class:list={['photo-grid', `photo-grid--${columns}`]}>
+  {items.map((it) => (
+    <figure class="photo-grid__item">
+      <Image src={photo(it.image)} alt={it.alt ?? altOf(it.image)} widths={[480, 800, 1200]} sizes="(min-width: 900px) 33vw, (min-width: 560px) 50vw, 92vw" format="webp" quality={70} />
+      {it.caption && <figcaption>{it.caption}</figcaption>}
+    </figure>
+  ))}
+</div>
+
+<style>
+  .photo-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .photo-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+  .photo-grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+  @media (min-width: 900px) { .photo-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+  .photo-grid__item { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--c-cream); border: 1px solid var(--c-line); }
+  .photo-grid__item :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .photo-grid__item figcaption { padding: 0.7rem 0.9rem; font-size: var(--fs-sm); color: var(--c-muted); }
+</style>

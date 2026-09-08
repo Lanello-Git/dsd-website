@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../config/site';
+import { breadcrumbSchema } from '../lib/schema';
+const crumbs = [{ name: 'Privacybeleid', href: '/privacybeleid/' }];
+---
+<Base title="Privacybeleid | DSD Dakwerken" description="Hoe DSD Dakwerken BV omgaat met uw persoonsgegevens: wat wij verzamelen via het contactformulier, waarom, hoelang wij het bewaren en welke rechten u hebt." path="/privacybeleid/" schema={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section">
+    <div class="container prose prose--doc">
+      <span class="eyebrow">Juridisch</span>
+      <h1>Privacybeleid</h1>
+      <p class="lead">DSD Dakwerken BV respecteert uw privacy en verwerkt uw persoonsgegevens volgens de Algemene Verordening Gegevensbescherming (AVG of GDPR). Hieronder leest u welke gegevens wij verzamelen, waarom en welke rechten u hebt.</p>
+
+      <h2>Wie is verantwoordelijk voor uw gegevens?</h2>
+      <p>{site.legalName}, {site.address.street}, {site.address.postalCode} {site.address.city}, BTW {site.vat}, is de verwerkingsverantwoordelijke. U bereikt ons via <a href={`mailto:${site.email}`}>{site.email}</a> of {site.phoneDisplay}.</p>
+
+      <h2>Welke gegevens verzamelen wij?</h2>
+      <p>Via het contactformulier of wanneer u ons belt of mailt, verzamelen wij enkel de gegevens die u zelf doorgeeft: uw naam, telefoonnummer, e-mailadres, gemeente, de dienst waarvoor u interesse hebt en uw bericht. Bij een plaatsbezoek noteren wij het adres van de werf en de gegevens die nodig zijn voor de offerte en de factuur.</p>
+
+      <h2>Waarvoor gebruiken wij uw gegevens?</h2>
+      <ul>
+        <li>Om uw aanvraag te beantwoorden, een plaatsbezoek in te plannen en een offerte op te maken (op basis van uw verzoek en de voorbereiding van een overeenkomst).</li>
+        <li>Om de werken uit te voeren, te factureren en onze wettelijke verplichtingen na te komen, zoals de boekhouding en de tienjarige aansprakelijkheid.</li>
+        <li>Om u de garantiedocumenten en attesten voor btw en premies te bezorgen.</li>
+      </ul>
+      <p>Wij gebruiken uw gegevens niet voor reclame van derden en verkopen ze nooit door.</p>
+
+      <h2>Met wie delen wij uw gegevens?</h2>
+      <p>Enkel met partijen die nodig zijn om onze diensten te leveren: onze boekhouder, de softwaretools waarin wij aanvragen en klantgegevens bijhouden (zoals ons CRM-systeem en e-mailprovider) en, als u dat vraagt, de instanties voor premies. Deze partijen verwerken uw gegevens enkel in onze opdracht en binnen de Europese regelgeving.</p>
+
+      <h2>Hoelang bewaren wij uw gegevens?</h2>
+      <p>Aanvragen die niet tot een opdracht leiden, bewaren wij maximaal twee jaar. Gegevens van klanten bewaren wij zolang de wet dat vraagt: facturen minstens tien jaar, en gegevens over uitgevoerde dakwerken tien jaar in het kader van de garantie en de tienjarige aansprakelijkheid.</p>
+
+      <h2>Cookies</h2>
+      <p>Deze website plaatst zelf geen trackingcookies. Het offerteformulier wordt geladen via ons klantenbeheersysteem (GoHighLevel, via links.desmetenzoon.be); dat systeem vraagt zelf uw toestemming voor eventuele cookies en verwerkt de gegevens die u invult uitsluitend in onze opdracht. De kaart op de contactpagina wordt pas geladen nadat u zelf op "Kaart tonen" klikt. Vanaf dan kan Google Maps cookies plaatsen; voor die verwerking geldt het privacybeleid van Google. Als wij in de toekomst statistieken of andere cookies toevoegen, vragen wij daarvoor eerst uw toestemming.</p>
+
+      <h2>Uw rechten</h2>
+      <p>U hebt het recht om uw gegevens in te kijken, te laten verbeteren of te laten wissen, om de verwerking te beperken, om bezwaar te maken en om uw gegevens over te dragen. Mail daarvoor naar <a href={`mailto:${site.email}`}>{site.email}</a>. Wij antwoorden binnen een maand. Bent u niet tevreden, dan kunt u een klacht indienen bij de Gegevensbeschermingsautoriteit, Drukpersstraat 35, 1000 Brussel, <a href="https://www.gegevensbeschermingsautoriteit.be" target="_blank" rel="noopener">www.gegevensbeschermingsautoriteit.be</a>.</p>
+
+      <h2>Wijzigingen</h2>
+      <p>Wij kunnen dit privacybeleid aanpassen. De meest recente versie vindt u altijd op deze pagina. Laatste aanpassing: september 2026.</p>
+    </div>
+  </section>
+</Base>
