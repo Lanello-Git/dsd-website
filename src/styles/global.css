@@ -106,8 +106,8 @@ strong { font-weight: 700; }
 .section--cream { background: var(--c-cream); }
 .section--ink { background: var(--c-ink); color: #e9e4da; }
 .section--ink h2, .section--ink h3 { color: var(--c-white); }
-.section--ink a { color: var(--c-gold); }
-.section--ink a:hover { color: var(--c-white); }
+.section--ink a:not(.btn) { color: var(--c-gold); }
+.section--ink a:not(.btn):hover { color: var(--c-white); }
 .eyebrow {
   display: inline-block; font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--c-gold-deep); margin-bottom: var(--space-3);
