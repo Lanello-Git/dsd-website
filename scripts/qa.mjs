@@ -5,6 +5,9 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
+// Expected phone number, read from the site config so this check follows the real number.
+const PHONE = readFileSync('src/config/site.ts', 'utf8').match(/phoneE164:\s*'(\+\d+)'/)[1];
+
 const DIST = 'dist';
 const problems = [];
 const warnings = [];
@@ -72,7 +75,7 @@ for (const p of pages) {
     if (!candidates.some((c) => existsSync(c))) problems.push(`${rel}: broken internal link ${href}`);
   }
   // tel links must use the right number
-  for (const m of text.matchAll(/href="tel:([^"]+)"/g)) if (m[1] !== '+32478672582') problems.push(`${rel}: wrong tel link ${m[1]}`);
+  for (const m of text.matchAll(/href="tel:([^"]+)"/g)) if (m[1] !== PHONE) problems.push(`${rel}: wrong tel link ${m[1]}`);
 }
 
 console.log(`Checked ${pages.length} pages.`);
