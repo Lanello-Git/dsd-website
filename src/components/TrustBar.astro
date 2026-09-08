@@ -10,8 +10,8 @@ const items = [
 ---
 <section class="trust" aria-label="Waarom klanten voor DSD Dakwerken kiezen">
   <div class="container trust__grid">
-    {items.map((i) => (
-      <div class="trust__item">
+    {items.map((i, idx) => (
+      <div class:list={['trust__item', { 'trust__item--wide': idx >= 2 }]}>
         <Icon name={i.icon as any} size={30} />
         <div><strong>{i.big}</strong><span>{i.text}</span></div>
       </div>
@@ -26,6 +26,6 @@ const items = [
   .trust__item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.35rem; }
   .trust__item svg { flex: none; }
   .trust__item strong { display: block; font-family: var(--font-display); font-size: var(--fs-xl); line-height: 1.1; margin-top: 0.15rem; }
-  @media (max-width: 759px) { .trust__item svg { width: 24px; height: 24px; } .trust__item strong { font-size: var(--fs-lg); } .trust__item span { font-size: var(--fs-xs); } }
+  @media (max-width: 759px) { .trust__item--wide { display: none; } .trust__item svg { width: 24px; height: 24px; } .trust__item strong { font-size: var(--fs-lg); } .trust__item span { font-size: var(--fs-xs); } }
   .trust__item span { font-size: var(--fs-sm); font-weight: 600; }
 </style>
