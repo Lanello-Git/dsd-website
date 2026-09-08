@@ -8,7 +8,7 @@ Read it fully before writing a page.
 - Name as displayed: **DSD Dakwerken**. Legal name: DSD Dakwerken BV. Old trading name: "DSD Dakwerken & Karweien".
 - Owner: **Peter De Smet**, roofer with **more than 30 years of experience**. He works with his son and a fixed crew of own tradesmen.
 - The BV was founded in 2022. Do not write "since 2022" as if the experience started then. Say "meer dan 30 jaar ervaring".
-- Address: Geuzestraat 18, 9910 Aalter (deelgemeente Knesselare), Oost-Vlaanderen. Phone 0478 67 25 82. Email info@dsddakwerken.be. BTW BE 0782.718.536.
+- Address: Geuzestraat 18, 9910 Aalter (deelgemeente Knesselare), Oost-Vlaanderen. Phone 0460 23 15 34. Email info@dsddakwerken.be. BTW BE 0782.718.536.
 - Numbers you may use: 30+ jaar ervaring, 150+ projecten in de laatste 3 jaar, 10 jaar garantie op waterdichtheid.
 - Numbers you may NOT invent: reviews, star ratings, number of employees, exact turnaround days, exact DSD prices.
 - USPs (from the owner): correcte prijzen, kwaliteit, werkt niet met onderaannemers, op tijd, 10 jaar garantie op waterdichtheid, simpel en betrouwbaar.

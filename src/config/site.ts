@@ -14,8 +14,8 @@ export const site = {
   foundedYear: 2022,
   experienceYears: 30,
   projectsLast3Years: 150,
-  phoneDisplay: '0478 67 25 82',
-  phoneE164: '+32478672582',
+  phoneDisplay: '0460 23 15 34',
+  phoneE164: '+32460231534',
   email: 'info@dsddakwerken.be',
   address: {
     street: 'Geuzestraat 18',

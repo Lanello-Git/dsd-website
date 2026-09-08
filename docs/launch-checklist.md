@@ -8,7 +8,7 @@ For the Lanello delivery team. Tick everything before the site goes live on dsdd
 - [ ] Preferred: put the GHL form URL in `ghlFormEmbedUrl` in `src/config/site.ts`; the site then renders the GHL form as an iframe (same as the other Lanello sites, no CORS risk).
 - [ ] Alternative: keep the native form and put a GHL inbound webhook URL in `formEndpoint`. The browser POSTs JSON straight to that URL, so first test that the webhook answers a browser preflight (OPTIONS with CORS headers). If it does not, the visitor sees an error and nothing is sent. The native form also sends `pagina` (the page the lead came from) and `geladen` (a timestamp); submits faster than 3 seconds or with the hidden `firma_ref` field filled are treated as bots and not sent.
 - [ ] Rebuild (`npm run build`) and submit a real test lead from the live site. Confirm it lands in GHL and that Peter gets the notification (bellen, sms, e-mail were his preferred channels).
-- [ ] Confirm the phone number 0478 67 25 82 is the number Peter wants on the site, or swap in the GHL tracking number in `src/config/site.ts` (`phoneDisplay` and `phoneE164`). Every tel: link on the site reads from that one place.
+- [ ] Confirm the phone number 0460 23 15 34 is the number Peter wants on the site, or swap in the GHL tracking number in `src/config/site.ts` (`phoneDisplay` and `phoneE164`). Every tel: link on the site reads from that one place.
 - [ ] Confirm info@dsddakwerken.be is live and monitored (ClickUp lists it; the old site used dsddakwerken@gmail.com).
 
 ## 2. Facts to confirm with Peter
@@ -21,7 +21,7 @@ For the Lanello delivery team. Tick everything before the site goes live on dsdd
 
 ## 3. Google Business Profile alignment (NAP)
 
-- [ ] GBP name, address and phone must read exactly: DSD Dakwerken, Geuzestraat 18, 9910 Aalter, 0478 67 25 82. The site footer, contact page and JSON-LD use this exact string.
+- [ ] GBP name, address and phone must read exactly: DSD Dakwerken, Geuzestraat 18, 9910 Aalter, 0460 23 15 34. The site footer, contact page and JSON-LD use this exact string.
 - [ ] Set the GBP website URL to https://dsddakwerken.be/ and the category to "Dakdekker" (Google's Dutch category label) with services listed as on the site.
 - [ ] Paste the GBP "Schrijf een review" link into `reviewsUrl` in `src/config/site.ts`.
 - [ ] Add the Facebook page and, if any, Instagram to `social` in `src/config/site.ts`.

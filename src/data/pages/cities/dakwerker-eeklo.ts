@@ -66,7 +66,7 @@ const content: CityContent = {
   nearby: ['dakwerker-maldegem', 'dakwerker-gent'],
   cta: {
     heading: 'Plan uw gratis plaatsbezoek in Eeklo',
-    text: 'U bereikt ons op 0478 67 25 82, per sms of via info@dsddakwerken.be. Peter komt in Eeklo of Balgerhoeke langs wanneer het u past, neemt het dak en de zolder door en bezorgt u een offerte met vaste prijzen. Daar betaalt u niets voor en het verplicht u tot niets.',
+    text: 'U bereikt ons op 0460 23 15 34, per sms of via info@dsddakwerken.be. Peter komt in Eeklo of Balgerhoeke langs wanneer het u past, neemt het dak en de zolder door en bezorgt u een offerte met vaste prijzen. Daar betaalt u niets voor en het verplicht u tot niets.',
   },
 };
 
