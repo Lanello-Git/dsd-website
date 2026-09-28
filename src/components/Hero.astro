@@ -62,7 +62,11 @@ const hasAside = Astro.slots.has('aside');
 
   /* Two-column hero: text left, form right (desktop); stacked and centered on smaller screens */
   .hero--split .hero__inner { display: grid; gap: var(--space-6); align-items: center; }
-  .hero--split .hero__aside { width: 100%; max-width: 34rem; margin-inline: auto; }
+  .hero--split .hero__aside { width: 100%; max-width: 34rem; margin-inline: auto; text-align: center; }
+  .hero--split .hero__aside :global(.lead__head) { text-align: center; }
+  .hero--split .hero__aside :global(.lead__intro) { margin-inline: auto; }
+  .hero--split .hero__aside :global(.lead__alt) { text-align: center; }
+  .hero--split .hero__aside :global(.lead__submit) { margin-inline: auto; }
   @media (min-width: 960px) {
     .hero--split .hero__inner { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-8); }
     .hero--split .hero__content { margin-inline: 0; max-width: none; text-align: left; }
