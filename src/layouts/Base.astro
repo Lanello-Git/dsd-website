@@ -102,5 +102,8 @@ const jsonLd = [localBusiness, ...schema];
       <slot />
     </main>
     <Footer />
+    {site.ghlChatWidgetId && (
+      <script is:inline src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id={site.ghlChatWidgetId}></script>
+    )}
   </body>
 </html>

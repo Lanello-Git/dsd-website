@@ -66,16 +66,18 @@ const photos = [
   </section>
 
   <section class="section" aria-labelledby="how-title">
-    <div class="container split split--reverse">
-      <div class="prose">
+    <div class="container">
+      <div class="section-head">
         <span class="eyebrow">Hoe wij werken</span>
-        <h2 id="how-title" class="mt-0">Eenvoudig, duidelijk en zonder verrassingen</h2>
-        <p>Peter komt zelf langs voor het plaatsbezoek. Hij kruipt op het dak of de zolder, bekijkt de constructie en luistert naar wat u wilt. Daarna krijgt u een offerte waarin elk onderdeel apart staat: afbraak, onderdak, isolatie, dakbedekking, zinkwerk, stelling en afvoer. Zo ziet u precies waar uw geld naartoe gaat.</p>
+        <h2 id="how-title">Eenvoudig, duidelijk en zonder verrassingen</h2>
+        <p class="lead">Peter komt zelf langs voor het plaatsbezoek. Hij kruipt op het dak of de zolder, bekijkt de constructie en luistert naar wat u wilt. Daarna krijgt u een offerte waarin elk onderdeel apart staat: afbraak, onderdak, isolatie, dakbedekking, zinkwerk, stelling en afvoer. Zo ziet u precies waar uw geld naartoe gaat.</p>
+      </div>
+      <div class="prose text-center how__text">
         <p>Tijdens de werken is uw dak elke avond regendicht en na de werken is de werf opgeruimd. U krijgt van ons de garantiedocumenten, het attest voor 6% btw en de facturen die u nodig hebt voor uw premie via Mijn VerbouwPremie.</p>
         <p>Vragen? Bel Peter rechtstreeks op <a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a>.</p>
       </div>
-      <div>
-        <PhotoGrid items={photos} columns={2} />
+      <div class="how__photos">
+        <PhotoGrid items={photos} columns={3} />
       </div>
     </div>
   </section>
@@ -100,6 +102,8 @@ const photos = [
 
 <style>
   .photo--tall :global(img) { aspect-ratio: 4 / 5; }
+  .how__text { margin-inline: auto; }
+  .how__photos { margin-top: var(--space-6); }
   .brands { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
   .brands li { margin: 0; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 0.5rem 1.1rem; font-weight: 600; color: var(--c-white); }
 </style>

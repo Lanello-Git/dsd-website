@@ -1,0 +1,28 @@
+---
+import { site } from '../config/site';
+interface Props { heading?: string; intro?: string }
+const {
+  heading = 'Wat klanten over DSD Dakwerken zeggen',
+  intro = 'Echte beoordelingen van klanten uit Aalter en het Meetjesland, rechtstreeks uit ons klantensysteem.',
+} = Astro.props;
+---
+{site.ghlReviewsWidgetUrl && (
+  <section class="section section--cream reviews" aria-labelledby="reviews-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Klantenbeoordelingen</span>
+        <h2 id="reviews-title">{heading}</h2>
+        <p class="lead">{intro}</p>
+      </div>
+      <div class="reviews__widget">
+        <script is:inline type="text/javascript" src={site.ghlReviewsScript}></script>
+        <iframe class="lc_reviews_widget" src={site.ghlReviewsWidgetUrl} title="Klantenbeoordelingen van DSD Dakwerken" frameborder="0" scrolling="no" style="min-width: 100%; width: 100%;" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .reviews__widget { max-width: 64rem; margin-inline: auto; }
+  .reviews__widget iframe { display: block; min-height: 320px; border: 0; }
+</style>

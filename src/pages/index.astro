@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
+import Reviews from '../components/Reviews.astro';
 import ServiceCards from '../components/ServiceCards.astro';
 import Steps from '../components/Steps.astro';
 import Faq from '../components/Faq.astro';
@@ -46,8 +47,13 @@ const projects = [
     intro="DSD Dakwerken is uw dakwerker in Aalter voor hellende en platte daken, dakisolatie, dakramen en totaalrenovaties. Peter De Smet en zijn eigen ploeg, meer dan 30 jaar ervaring en 10 jaar garantie op waterdichtheid."
     image="hoeve-renovatie-nieuw-dak-luchtfoto"
     imageAlt="Luchtfoto van een gerenoveerde hoeve met nieuw pannendak door DSD Dakwerken in het Meetjesland"
-  />
+    primaryHref="#offerte"
+  >
+    <ContactForm slot="aside" compact heading="Vraag uw gratis offerte aan" intro="Wij bellen u zo snel mogelijk terug voor een gratis en vrijblijvend plaatsbezoek." />
+  </Hero>
   <TrustBar />
+
+  <Reviews />
 
   <ServiceCards heading="Dakwerken en renovaties door eigen vakmensen" intro="Van een lekkende dakgoot tot een volledig nieuw dak of een verbouwing van uw woning: DSD Dakwerken doet het met eigen mensen en eigen materiaal." />
 
@@ -144,7 +150,14 @@ const projects = [
           <li><Icon name="clock" /><div><strong>Bereikbaar</strong>{site.hours.map((h) => <span>{h.days}: {h.open} - {h.close}</span>)}</div></li>
         </ul>
       </div>
-      <ContactForm headingLevel={3} />
+      <div class="card contact-cta">
+        <h3>Liever meteen een afspraak?</h3>
+        <p class="muted">Vul het formulier bovenaan de pagina in of bel ons. Voor een lek of stormschade komen wij zo snel mogelijk langs.</p>
+        <div class="btn-row">
+          <a class="btn btn--gold" href="#offerte">Naar het formulier <Icon name="arrow-right" /></a>
+          <a class="btn btn--outline" href={`tel:${site.phoneE164}`}><Icon name="phone" /> Bel {site.phoneDisplay}</a>
+        </div>
+      </div>
     </div>
   </section>
 </Base>
@@ -161,4 +174,7 @@ const projects = [
   .contact-list svg { color: var(--c-gold-deep); flex: none; margin-top: 0.15rem; }
   .contact-list strong { display: block; }
   .contact-list a, .contact-list span { display: block; }
+  .contact-cta { text-align: center; display: grid; gap: var(--space-4); justify-items: center; }
+  .contact-cta h3 { margin: 0; }
+  .contact-cta .btn-row { justify-content: center; }
 </style>
