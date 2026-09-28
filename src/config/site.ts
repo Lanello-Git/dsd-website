@@ -48,6 +48,8 @@ export const site = {
   ghlFormName: 'Website form - With email',
   ghlFormHeight: 642,
   ghlEmbedScript: 'https://links.desmetenzoon.be/js/form_embed.js',
+  /** GHL chat widget, loaded on every page. Empty string disables it. */
+  ghlChatWidgetId: '6a7f363b91912ff8be3b90ec',
   formEndpoint: '',
   guarantee: '10 jaar garantie op waterdichtheid',
   usps: [
