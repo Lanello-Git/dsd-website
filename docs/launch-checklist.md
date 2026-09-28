@@ -6,6 +6,7 @@ For the Lanello delivery team. Tick everything before the site goes live on dsdd
 
 - [x] GHL form embedded on every page that has a form: "Website form - With email" (AIDxCNUQKl5KhAKQLBfb on links.desmetenzoon.be), configured in `src/config/site.ts`. The native fallback form stays in the code for the day the embed URL is cleared.
 - [x] GHL chat widget on every page (widget 6a7f363b91912ff8be3b90ec, set in `src/config/site.ts` as `ghlChatWidgetId`). Test on the live site that a chat message reaches the GHL inbox.
+- [x] GHL reviews widget on the home page, between the trust bar and the services (widget vehIJisM1ObTDun5mMJU, set in `src/config/site.ts` as `ghlReviewsWidgetUrl`). Check on the live site that it shows real reviews and resizes correctly.
 - [ ] Style the GHL form to match the site: button background #b8974f with text #141414, hover #86682b with white text, 6 px radius, Source Sans 3 bold; input borders #8f877a, focus ring #86682b.
 - [ ] Rebuild (`npm run build`) and submit a real test lead from the live site. Confirm it lands in GHL and that Peter gets the notification (bellen, sms, e-mail were his preferred channels).
 - [ ] Confirm the phone number 0460 23 15 34 is the number Peter wants on the site, or swap in the GHL tracking number in `src/config/site.ts` (`phoneDisplay` and `phoneE164`). Every tel: link on the site reads from that one place.
