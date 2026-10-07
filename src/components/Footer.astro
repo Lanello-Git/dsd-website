@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import logo from '../assets/logo-dsd-dakwerken.png';
 import { site } from '../config/site';
+import { trackingConfigured } from '../config/tracking';
 import { services, serviceHref } from '../data/services';
 import { cities, cityHref } from '../data/cities';
 const year = new Date().getFullYear();
@@ -50,6 +51,7 @@ const year = new Date().getFullYear();
         <li><a href="/diensten/">Alle diensten</a></li>
         <li><a href="/contact/">Contact en offerte</a></li>
         <li><a href="/privacybeleid/">Privacybeleid</a></li>
+        {trackingConfigured && <li><button type="button" data-open-consent hidden>Cookievoorkeuren</button></li>}
       </ul>
       <a class="btn btn--gold footer__cta" href="/contact/">Vraag een gratis offerte</a>
     </nav>
@@ -74,6 +76,7 @@ const year = new Date().getFullYear();
   .footer__title { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-md); color: var(--c-gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-4); }
   .footer__links, .footer__contact { list-style: none; padding: 0; margin: 0; }
   .footer__links li { margin-bottom: 0.45rem; }
+  .footer__links button { font: inherit; color: #e9e4da; padding: 0; border: 0; background: none; cursor: pointer; text-decoration: underline; }
   .footer__contact li { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.75rem; }
   .footer__contact svg { color: var(--c-gold); flex: none; margin-top: 0.2rem; }
   .footer__hours { display: block; }

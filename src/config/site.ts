@@ -9,7 +9,7 @@ export const site = {
   name: 'DSD Dakwerken',
   legalName: 'DSD Dakwerken BV',
   tagline: 'Dakwerken en renovaties in Aalter en het Meetjesland',
-  url: 'https://dsddakwerken.be',
+  url: 'https://desmetenzoon.be',
   owner: 'Peter De Smet',
   foundedYear: 2022,
   experienceYears: 30,

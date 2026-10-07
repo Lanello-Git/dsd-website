@@ -6,7 +6,9 @@ import dmSerifWoff2 from '@fontsource/dm-serif-display/files/dm-serif-display-la
 import sourceSansWoff2 from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { site } from '../config/site';
+import { tracking } from '../config/tracking';
 import { servedTowns } from '../data/cities';
 
 interface Props {
@@ -68,6 +70,7 @@ const jsonLd = [localBusiness, ...schema];
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {tracking.googleSiteVerification && <meta name="google-site-verification" content={tracking.googleSiteVerification} />}
     {!noindex && <link rel="canonical" href={canonical} />}
     {noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
     <meta name="theme-color" content="#141414" />
@@ -102,6 +105,7 @@ const jsonLd = [localBusiness, ...schema];
       <slot />
     </main>
     <Footer />
+    <AnalyticsConsent />
     {site.ghlChatWidgetId && (
       <script is:inline src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id={site.ghlChatWidgetId}></script>
     )}
