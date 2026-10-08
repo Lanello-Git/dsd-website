@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "qa": "node scripts/qa.mjs"
+    "qa": "node scripts/qa.mjs",
+    "test:analytics": "node --experimental-strip-types --test scripts/analytics-consent.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

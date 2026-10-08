@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://dsddakwerken.be',
+  site: 'https://desmetenzoon.be',
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [

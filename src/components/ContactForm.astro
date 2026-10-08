@@ -23,7 +23,7 @@ const endpoint = site.formEndpoint;
 const embed = site.ghlFormEmbedUrl;
 const Heading = headingLevel === 3 ? 'h3' : 'h2';
 ---
-<div class:list={['lead', { 'lead--compact': compact }]} id="offerte">
+<div class:list={['lead', { 'lead--compact': compact }]} id="offerte" data-clarity-mask="true">
   <div class="lead__head">
     <Heading class="lead__title">{heading}</Heading>
     <p class="lead__intro">{intro}</p>
@@ -99,7 +99,7 @@ const Heading = headingLevel === 3 ? 'h3' : 'h2';
           <input id="firma_ref" name="firma_ref" type="text" tabindex="-1" autocomplete="off" />
         </div>
       </div>
-      <input type="hidden" name="bron" value="dsddakwerken.be" />
+      <input type="hidden" name="bron" value={new URL(site.url).hostname} />
       <input type="hidden" name="pagina" value="" />
       <input type="hidden" name="geladen" value="" />
       <button class="btn btn--gold btn--lg lead__submit" type="submit">Verstuur mijn aanvraag <Icon name="arrow-right" /></button>

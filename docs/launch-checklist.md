@@ -1,6 +1,6 @@
 # DSD Dakwerken, launch checklist
 
-For the Lanello delivery team. Tick everything before the site goes live on dsddakwerken.be.
+For the Lanello delivery team. Tick everything before the site goes live on desmetenzoon.be.
 
 ## 1. Lead path (most important, verify, never assume)
 
@@ -23,7 +23,7 @@ For the Lanello delivery team. Tick everything before the site goes live on dsdd
 ## 3. Google Business Profile alignment (NAP)
 
 - [ ] GBP name, address and phone must read exactly: DSD Dakwerken, Geuzestraat 18, 9910 Aalter, 0460 23 15 34. The site footer, contact page and JSON-LD use this exact string.
-- [ ] Set the GBP website URL to https://dsddakwerken.be/ and the category to "Dakdekker" (Google's Dutch category label) with services listed as on the site.
+- [ ] Set the GBP website URL to https://desmetenzoon.be/ and the category to "Dakdekker" (Google's Dutch category label) with services listed as on the site.
 - [ ] Paste the GBP "Schrijf een review" link into `reviewsUrl` in `src/config/site.ts`.
 - [ ] Add the Facebook page and, if any, Instagram to `social` in `src/config/site.ts`.
 
@@ -31,16 +31,16 @@ For the Lanello delivery team. Tick everything before the site goes live on dsdd
 
 - [ ] Upload the contents of `dist/` to the web root (public_html). Keep `.htaccess` (it is a hidden file).
 - [ ] Test the old URLs: /dakwerken, /renovaties, /velux-ramen, /daken-ontmossen, /typography must 301 to the new pages. /contact and /gevelbekleding keep their URL.
-- [ ] Test https://www.dsddakwerken.be redirects to https://dsddakwerken.be.
+- [ ] Test https://www.dsddakwerken.be redirects to https://desmetenzoon.be.
 - [ ] SSL active, mixed-content free.
 - [ ] Turn on LiteSpeed cache if available; the `.htaccess` already sets long cache headers for assets.
 
 ## 5. Search Console and indexing
 
-- [ ] Add https://dsddakwerken.be to Google Search Console, submit https://dsddakwerken.be/sitemap-index.xml.
+- [ ] Add https://desmetenzoon.be to Google Search Console, submit https://desmetenzoon.be/sitemap-index.xml.
 - [ ] Request indexing for the home page, /diensten/, /werkgebied/ and the 5 city pages.
 - [ ] Also submit in Bing Webmaster Tools (imports from Search Console).
-- [ ] Analytics: none installed on purpose (no cookie banner needed). If GA4 or GTM is added later, add a consent banner first (Belgian GBA is strict) and update `/privacybeleid/`.
+- [ ] Analytics: the consent-gated module is prepared. Configure verified public IDs, then verify no tracker loads before acceptance or after refusal; complete live pageview/contact-intent receipt. See `docs/analytics-setup.md`. Form conversions need separate exact-form validation.
 
 ## 6. Final pass on the live site
 

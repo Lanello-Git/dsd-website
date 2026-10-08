@@ -5,17 +5,18 @@ AddType font/woff2 .woff2
 RewriteEngine On
 
 # 1. Old URLs from the previous site (exact match, one hop, keeps rankings)
-RewriteRule ^dakwerken/?$        https://dsddakwerken.be/diensten/        [R=301,L,NC]
-RewriteRule ^renovaties/?$       https://dsddakwerken.be/renovatiewerken/ [R=301,L,NC]
-RewriteRule ^velux-ramen/?$      https://dsddakwerken.be/dakramen/        [R=301,L,NC]
-RewriteRule ^daken-ontmossen/?$  https://dsddakwerken.be/dak-ontmossen/   [R=301,L,NC]
-RewriteRule ^typography/?$       https://dsddakwerken.be/                 [R=301,L,NC]
+RewriteRule ^dakwerken/?$        https://desmetenzoon.be/diensten/        [R=301,L,NC]
+RewriteRule ^renovaties/?$       https://desmetenzoon.be/renovatiewerken/ [R=301,L,NC]
+RewriteRule ^velux-ramen/?$      https://desmetenzoon.be/dakramen/        [R=301,L,NC]
+RewriteRule ^daken-ontmossen/?$  https://desmetenzoon.be/dak-ontmossen/   [R=301,L,NC]
+RewriteRule ^typography/?$       https://desmetenzoon.be/                 [R=301,L,NC]
 
 # 2. Force HTTPS and non-www (guard for a proxy such as Cloudflare)
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} ^www\. [NC]
-RewriteRule ^ https://dsddakwerken.be%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} !^desmetenzoon\.be$ [NC]
+RewriteRule ^ https://desmetenzoon.be%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+RewriteRule ^ https://desmetenzoon.be%{REQUEST_URI} [L,R=301]
 
 # 3. Caching and headers
 <IfModule mod_expires.c>

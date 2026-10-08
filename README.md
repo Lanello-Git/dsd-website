@@ -2,7 +2,7 @@
 
 Static, SEO-first website for DSD Dakwerken (Peter De Smet), dakwerker in Aalter (Knesselare), Belgium. Belgian Dutch, 20 content pages plus privacy, thank-you and 404.
 
-Built with [Astro](https://astro.build) as plain HTML, CSS and a few lines of JavaScript. No CMS, no tracking, self-hosted fonts.
+Built with [Astro](https://astro.build) as plain HTML, CSS and a few lines of JavaScript. No CMS, self-hosted fonts. Optional analytics is gated by an explicit visitor choice; see `docs/analytics-setup.md`.
 
 ## Run it
 
@@ -34,8 +34,8 @@ node scripts/similarity.mjs   # checks city and service pages for too much text 
 1. **Lead form.** Set `formEndpoint` (a GoHighLevel inbound webhook that accepts JSON) or `ghlFormEmbedUrl` (a GHL form URL, rendered as iframe) in `src/config/site.ts`. Until one is set, the form shows a visible "bel ons" notice instead of failing silently. Test a real submission.
 2. **Opening hours** in `src/config/site.ts` are a placeholder to confirm with Peter.
 3. **Google review link** (`reviewsUrl`) and Instagram URL in `src/config/site.ts`.
-4. Upload `dist/` to the web root on Hostinger. The `.htaccess` in it forces HTTPS, redirects the old URLs and sets caching.
-5. Submit `https://dsddakwerken.be/sitemap-index.xml` in Google Search Console.
+4. Deploy through the existing Hostinger Astro / Node 22.x source ZIP application. See `docs/analytics-setup.md`; include public assets and verify production redirects after deployment.
+5. Submit `https://desmetenzoon.be/sitemap-index.xml` in Google Search Console.
 
 ## Adding a page
 

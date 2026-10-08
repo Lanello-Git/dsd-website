@@ -1,0 +1,49 @@
+---
+import { tracking, trackingConfigured } from '../config/tracking';
+import { site } from '../config/site';
+---
+{trackingConfigured && (
+  <section id="analytics-consent" class="consent" aria-labelledby="consent-title" hidden
+    data-ga4={tracking.ga4MeasurementId} data-clarity={tracking.clarityProjectId}
+    data-hosts={tracking.allowedHosts.join(',')} data-phone={`tel:${site.phoneE164}`} data-email={`mailto:${site.email}`}>
+    <h2 id="consent-title">Uw keuze voor statistieken</h2>
+    <p>Met uw toestemming meten wij bezoeken en klikken op onze telefoon- en e-maillinks{tracking.clarityProjectId ? ', en bekijken wij met Microsoft Clarity hoe onze website wordt gebruikt' : ''}. Zonder toestemming laden wij deze meetdiensten niet. U kunt uw keuze altijd wijzigen via Cookievoorkeuren.</p>
+    <a href="/privacybeleid/">Meer over uw privacy</a>
+    <div class="consent__actions">
+      <button type="button" class="btn" data-consent="denied">Alleen noodzakelijk</button>
+      <button type="button" class="btn" data-consent="granted">Statistieken toestaan</button>
+    </div>
+  </section>
+)}
+<script>
+  import { createTrackingController } from '../lib/analytics-consent';
+  const panel = document.querySelector<HTMLElement>('#analytics-consent');
+  if (panel) {
+    let opener: HTMLButtonElement | null = null;
+    const controller = createTrackingController({
+      ga4MeasurementId: panel.dataset.ga4 ?? '', clarityProjectId: panel.dataset.clarity ?? '',
+      allowedHosts: (panel.dataset.hosts ?? '').split(','), phoneHref: panel.dataset.phone ?? '', emailHref: panel.dataset.email ?? '',
+    }, window);
+    panel.hidden = !controller.enabled || controller.initialChoice !== null;
+    document.querySelectorAll<HTMLButtonElement>('[data-open-consent]').forEach(button => {
+      button.hidden = !controller.enabled;
+      button.addEventListener('click', () => { opener = button; panel.hidden = false; panel.querySelector<HTMLButtonElement>('button')?.focus(); });
+    });
+    panel.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach(button => {
+      button.addEventListener('click', () => {
+        controller.choose(button.dataset.consent === 'granted' ? 'granted' : 'denied');
+        panel.hidden = true;
+        opener?.focus();
+      });
+    });
+  }
+</script>
+<style>
+  .consent { position: fixed; z-index: 1000; inset: auto 1rem 1rem; max-width: 42rem; margin-inline: auto; max-height: calc(100dvh - 2rem); overflow-y: auto; padding: 1.5rem; background: var(--c-white); color: var(--c-ink); border: 1px solid var(--c-line); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+  .consent[hidden] { display: none; }
+  .consent h2 { font-size: var(--fs-lg); margin-bottom: .75rem; }
+  .consent p { margin-bottom: .75rem; }
+  .consent__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+  .consent__actions .btn { flex: 1 1 13rem; border: 1px solid var(--c-ink); background: var(--c-white); color: var(--c-ink); }
+  .consent__actions .btn:hover { background: var(--c-cream); }
+</style>
